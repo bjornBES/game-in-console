@@ -11,12 +11,15 @@ namespace game_in_console
     {
         public bool ToXTo;
         public bool IsDun;
-        public item[] inv;
+        public string[] inv;
+        public int[] invCon;
+        public int InvIndex = 0;
         public float x, y;
         public int SpaceInInv = 50;
         public void Start()
         {
-            inv = new item[SpaceInInv];
+            inv = new string[SpaceInInv];
+            invCon = new int[SpaceInInv];
         }
         public float GetX()
         {
