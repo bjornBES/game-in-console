@@ -16,6 +16,7 @@ namespace game_in_console
         public int InvIndex = 0;
         public float x, y;
         public int SpaceInInv = 50;
+        public int coins = 50;
         public void Start()
         {
             inv = new string[SpaceInInv];

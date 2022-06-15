@@ -46,6 +46,7 @@ namespace game_in_console
                 Console.WriteLine("Bolvar: " + "ok here take this map and open it");
             }
             Console.WriteLine(@"say ""Map"" to open your map");
+            User = "";
             User = Console.ReadLine();
             if(User == "Map")
             {
@@ -62,15 +63,29 @@ namespace game_in_console
             Console.WriteLine(@"say ""shop"" to go to the shop");
             Update();
         }
+        bool First = true;
         void Update()
         { 
-            string User = Console.ReadLine();
+            string User = "";
+            if(First == false)
+            {
+                User = Console.ReadLine();
+            }
+            else
+            {
+                User = Console.ReadLine();
+                Console.WriteLine("the ShopKeeper: " + "hello " + PlayerName + " my name is The ShopKeeper and i own the shop look around and see what you need");
+                Console.WriteLine(@"say ""what can i buy"" or ""WCIB"" to look around the shop");
+                First = false;
+            }
             if (User == "StartDun" || User == "SD")
                 isDun(true);
             if (User == "Run")
                 isDun(false);
+            if (User == "How many coins go i have" || User == "hmcgih" || User == "coins")
+                Console.WriteLine(Player.coins);
             if (User == "Shop" || User == "shop" && Player.IsDun != true)
-                Shop(true);
+                Shop(true, false);
             if(User == "Inv")
             {
                 Console.WriteLine("you have");
@@ -115,10 +130,11 @@ namespace game_in_console
         int item1 = 0;
         int item2 = 0;
         int item3 = 0;
-        public void Shop(bool shop)
+        public void Shop(bool shop, bool start)
         {
             string[] Taple = { "em" ,"Sticks", "Stones", "irons", "flints"};
             int[] Con = { 0, 2 , 3, 2, 2 };
+            int[] cost = { 0, 10, 15, 20, 10};
             string Help = @"you can say ""GO"" or ""GoOut"" to Go out of the shop or if you want to buy stuff say ""what can i buy"" or ""WCIB"" to see what the shopkepper has in stok and then say ""buy"" to buy";
             string[] ShopKeeperIn = { "hello what can i do for you?", "it's it not a good day", "The Shop has all the items you need :D" };
             string[] ShopKeeperOut = { "thanks you and bye", "bye", "farewell hero" };
@@ -142,10 +158,15 @@ namespace game_in_console
                         item2+= 2;
                     if (item3 == 0)
                         item3+= 3;
-                    Console.WriteLine("the ShopKeeper: " + ShopKeeperIn[RNG.Next(0, ShopKeeperIn.Length)]);
+                    if(start == false)
+                        Console.WriteLine("the ShopKeeper: " + ShopKeeperIn[RNG.Next(0, ShopKeeperIn.Length)]);
                     En = true;
                 }
-                string User = Console.ReadLine();
+                string User = "";
+                if (start == true)
+                    User = "WCIB";
+                else
+                    User = Console.ReadLine();
                 if (User == "goout" || User == "GoOut" || User == "GO")
                 {
                     Console.WriteLine("the ShopKeeper: " + ShopKeeperOut[RNG.Next(0, ShopKeeperOut.Length)]);
@@ -153,42 +174,68 @@ namespace game_in_console
                     En = false;
                 }
                 if (User == "what can i buy" || User == "what can i buy?" || User == "WCIB")
-                    Console.WriteLine("the ShopKeeper: " + "i have " + Con[item1] + " " + Taple[item1] + ", " + 
-                        Con[item2] + " " + Taple[item2] + ", " + 
-                        Con[item3] + " " + Taple[item3]);
+                {
+                    Console.WriteLine("the ShopKeeper: " + "i have " + Con[item1] + " " + Taple[item1] + " for " + cost[item1] + ", " +
+    Con[item2] + " " + Taple[item2] + " for " + cost[item2] + ", " +
+    Con[item3] + " " + Taple[item3] + " for " + cost[item3]);
+                    User = "";
+                    if (start == true)
+                        Shop(shop, false);
+                }
                 if (User == "Help" || User == "help" || User == "_h")
                     Console.WriteLine(Help);
                 if (User == "Buy" || User == "buy")
                 {
                     Console.WriteLine("the ShopKeeper: " + "what to buy?");
-                    Console.WriteLine("to a buy a thing you need to say the item number eg " + "item1 to buy " + Con[item1] + " of " + Taple[item1]);
+                    Console.WriteLine("to a buy a thing you need to say the item number eg " + "item1 to buy " + Con[item1] + " " + Taple[item1] + " for " + cost[item1]);
                     string UserBuy = Console.ReadLine();
                     if (UserBuy == "item1" || UserBuy == "Item1")
                     {
-                        Player.inv[Player.InvIndex] = Taple[item1];
-                        Player.invCon[Player.InvIndex] = Con[item1];
-                        Player.InvIndex++;
-                        Console.WriteLine("the ShopKeeper: " + "thank you for purchaseing " + Con[item1] + " " + Taple[item1]);
-                        Taple[item1] = "";
-                        Con[item1] = 0;
+                        if (Player.coins >= cost[item1])
+                        {
+                            Player.inv[Player.InvIndex] = Taple[item1];
+                            Player.invCon[Player.InvIndex] = Con[item1];
+                            Player.InvIndex++;
+                            Console.WriteLine("the ShopKeeper: " + "thank you for purchaseing " + Con[item1] + " " + Taple[item1] + " for " + cost[item1]);
+                            Player.coins -= cost[item1];
+                            Taple[item1] = "";
+                            Con[item1] = 0;
+                            cost[item1] = 0;
+                        }
+                        else
+                            Console.WriteLine("the ShopKeeper: " + "Sorry but you do not have enough coins you need " + cost[item1] + " coins");
                     }
                     if (UserBuy == "item2" || UserBuy == "Item2")
                     {
-                        Player.inv[Player.InvIndex] = Taple[item2];
-                        Player.invCon[Player.InvIndex] = Con[item2];
-                        Player.InvIndex++;
-                        Console.WriteLine("the ShopKeeper: " + "thank you for purchaseing " + Con[item2] + " " + Taple[item2]);
-                        Taple[item2] = "";
-                        Con[item2] = 0;
+                        if (Player.coins >= cost[item2])
+                        {
+                            Player.inv[Player.InvIndex] = Taple[item2];
+                            Player.invCon[Player.InvIndex] = Con[item2];
+                            Player.InvIndex++;
+                            Console.WriteLine("the ShopKeeper: " + "thank you for purchaseing " + Con[item2] + " " + Taple[item2] + " for " + cost[item2]);
+                            Player.coins -= cost[item2];
+                            Taple[item2] = "";
+                            Con[item2] = 0;
+                            cost[item2] = 0;
+                        }
+                        else
+                            Console.WriteLine("the ShopKeeper: " + "Sorry but you do not have enough coins you need " + cost[item2] + " coins");
                     }
                     if (UserBuy == "item3" || UserBuy == "Item3")
                     {
-                        Player.inv[Player.InvIndex] = Taple[item3];
-                        Player.invCon[Player.InvIndex] = Con[item3];
-                        Player.InvIndex++;
-                        Console.WriteLine("the ShopKeeper: " + "thank you for purchaseing " + Con[item3] + " " + Taple[item3]);
-                        Taple[item3] = "";
-                        Con[item3] = 0;
+                        if (Player.coins >= cost[item3])
+                        {
+                            Player.inv[Player.InvIndex] = Taple[item3];
+                            Player.invCon[Player.InvIndex] = Con[item3];
+                            Player.InvIndex++;
+                            Console.WriteLine("the ShopKeeper: " + "thank you for purchaseing " + Con[item3] + " " + Taple[item3] + " for " + cost[item3]);
+                            Player.coins -= cost[item3];
+                            Taple[item3] = "";
+                            Con[item3] = 0;
+                            cost[item3] = 0;
+                        }
+                        else
+                            Console.WriteLine("the ShopKeeper: " + "Sorry but you do not have enough coins you need " + cost[item3] + " coins");
                     }
                 }
                 if (User == "what can i do in here" || User == "wcidih")
@@ -197,7 +244,7 @@ namespace game_in_console
                 }
                 User = "";
                 if(EnR == false)
-                    Shop(shop);
+                    Shop(shop, start);
             }
         }
     }
