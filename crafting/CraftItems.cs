@@ -3,109 +3,85 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using game_in_console.items;
 
 namespace game_in_console.crafting
 {
     [Serializable]
     public class CraftingRe
     {
-        public string Slot1ItemName;
-        public string Slot2ItemName;
-        public string Slot3ItemName;
-        public string Slot4ItemName;
-        public string Slot5ItemName;
+        public string ItemName1;
+        public string ItemName2;
+        public string ItemName3;
+        public string ItemName4;
+        public string ItemName5;
+    }
+    public class Re
+    {
+        public string result;
+        public CraftingRe craftingRe = new CraftingRe();
     }
     public class CraftItems
     {
-        int SlotItemNameIndex = 2;
-        public string[] Slot1ItemName;
-        public string[] Slot2ItemName;
-        public string[] Slot3ItemName;
-        public string[] Slot4ItemName;
-        public string[] Slot5ItemName;
+        Re[] Re;
+        int CraftReIndex = 2;
         Mat mat;
         public Player Player;
         public string CraftintItems = "Stone pickaxe for 3 Stones and 2 Sticks";
         public void Start()
         {
-            Slot1ItemName = new string[SlotItemNameIndex];
-            Slot2ItemName = new string[SlotItemNameIndex];
-            Slot3ItemName = new string[SlotItemNameIndex];
-            Slot4ItemName = new string[SlotItemNameIndex];
-            Slot5ItemName = new string[SlotItemNameIndex];
-            mat = new Mat();
-            Slot1ItemName[0] = "Stones";
-            Slot2ItemName[0] = "Sticks";
+            Player = new Player();
+            Re = new Re[CraftReIndex];
         }
         public void Craft(string Item)
         {
-            if(Item == "SP" || Item == "StonePickaxe" || Item == "stonepickaxe")
+            Re[0].craftingRe.ItemName1 = "3 Stones";
+            Re[0].craftingRe.ItemName2 = "2 Sticks";
+            //make a crafting system 
+            for (int i = 0; i < Player.InvIndex; i++)
             {
-                for (int i = 0; i < Player.InvIndex; i++)
+                int II = i + 1;
+                if(Item == "SP")
                 {
-                    int II = i + 1;
-                    int IIM = i - 1;
-                    if(Player.inv[II] == Slot1ItemName[0] && Player.inv[i] == Slot2ItemName[0] ||
-                        Player.inv[i] == Slot1ItemName[0] && Player.inv[II] == Slot2ItemName[0])
+                    if(Re[0].craftingRe.ItemName1 == Player.inv[i] + " " + Player.invCon[i] &&
+                        Re[0].craftingRe.ItemName2 == Player.inv[II] + " " + Player.invCon[II])
                     {
-                        if(Player.invCon[i] >= 2 && Player.invCon[II] >= 3 ||
-                            Player.invCon[i] >= 3 && Player.invCon[II] >= 2)
+                        if (Player.invCon[i] == 0)
                         {
-                            if (Player.inv[i] == "Stones")
-                            {
-                                Player.invCon[i] -= 3;
-                            }
-                            else if (Player.inv[i] == "Sticks")
-                            {
-                                Player.invCon[i] -= 2;
-                            }
                             Player.inv[i] = "";
-                            if (i != 0)
+                            Player.invCon[i] = Player.invCon[i] - 3;
+                            Player.inv[i] = "SP";
+                            Player.invCon[i] = 1;
+                        }
+                        if (Player.invCon[II] == 0)
+                        {
+                            Player.inv[II] = "";
+                            Player.invCon[II] = Player.invCon[II] - 2;
+                            if (Player.inv[i] != "SP")
                             {
-                                if (Player.inv[IIM] == "Stones")
-                                {
-                                    Player.invCon[IIM] -= 3;
-                                }
-                                else if(Player.inv[IIM] == "Sticks")
-                                {
-                                    Player.invCon[IIM] -= 2;
-                                }
-                                Player.inv[IIM] = "";
-                            }
-                            else
-                            {
-                                if (Player.inv[II] == "Stones")
-                                {
-                                    Player.invCon[II] -= 3;
-                                }
-                                else if (Player.inv[II] == "Sticks")
-                                {
-                                    Player.invCon[II] -= 2;
-                                }
-                                Player.inv[II] = "";
-                            }
-                            int III = i + 2;
-                            if (Player.invCon[i] == 0)
-                            {
-                                Player.invCon[i] = 1;
-                                Player.inv[i] = "StonePickaxe";
-                            }
-                            else if (Player.invCon[II] == 0)
-                            {
+                                Player.inv[II] = "SP";
                                 Player.invCon[II] = 1;
-                                Player.inv[II] = "StonePickaxe";
                             }
-                            else if(Player.invCon[IIM] == 0)
+                        }
+                    }
+                    if (Re[0].craftingRe.ItemName2 == Player.inv[i] + " " + Player.invCon[i] &&
+                        Re[0].craftingRe.ItemName1 == Player.inv[II] + " " + Player.invCon[II])
+                    {
+                        if (Player.invCon[II] == 0)
+                        {
+                            Player.inv[II] = "";
+                            Player.invCon[II] = Player.invCon[II] - 3;
+                            if(Player.inv[i] != "SP")
                             {
-                                Player.invCon[IIM] = 1;
-                                Player.inv[IIM] = "StonePickaxe";
+                                Player.inv[II] = "SP";
+                                Player.invCon[II] = 1;
                             }
-                            else if (Player.invCon[III] == 0)
-                            {
-                                Player.invCon[III] = 1;
-                                Player.inv[III] = "StonePickaxe";
-                            }
+                        }
+                        if (Player.invCon[i] == 0)
+                        {
+                            Player.inv[i] = "";
+                            Player.invCon[i] = Player.invCon[i] - 2;
+                            Player.inv[i] = "SP";
+                            Player.invCon[i] = 1;
                         }
                     }
                 }

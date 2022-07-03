@@ -4,6 +4,15 @@ using game_in_console.enums;
 
 namespace game_in_console
 {
+    public enum ShopOp
+    {
+        none,
+        WCIB,
+        GO,
+        buy,
+        wcidih,
+        help
+    } 
     public class ShopItemsList
     {
         public string name;
@@ -149,8 +158,10 @@ namespace game_in_console
         int[] cost = { 0, 10, 15, 20, 10 };
         ShopItemsList[] itemsList = new ShopItemsList[3];
         int ItemsListIndex;
+        
         public void Shop(bool shop, bool start)
         {
+            ShopOp shopOp = ShopOp.none;
             int Items = 3;
             for (int i = 0; i < itemsList.Length; i++)
             {
@@ -164,31 +175,61 @@ namespace game_in_console
                 if(En == false)
                     S_setup(RNG, start);
 
-                string User = "";
-                if (start == true)
-                    User = "WCIB";
-                else
-                    User = Console.ReadLine();
-                if (User == "goout" || User == "GoOut" || User == "GO")
+                string User = Console.ReadLine();
+                /*
+                 * if(user == enumAsString ) or Publuc Enum name ; << global then in a method switch(name){case Enum.Vale: break;;}
+                 */
+                switch (UserToShopOp(User))
                 {
-                    Console.WriteLine("the ShopKeeper: " + ShopKeeperOut[RNG.Next(0, ShopKeeperOut.Length)]);
-                    EnR = true;
-                    En = false;
-                }
-                if (User == "what can i buy" || User == "what can i buy?" || User == "WCIB")
-                    S_WCIB();
-                if (User == "Help" || User == "help" || User == "_h")
-                    Console.WriteLine(Help);
-                if (User == "Buy" || User == "buy")
-                    S_Buy();
-                if (User == "what can i do in here" || User == "wcidih")
-                {
-                    Console.WriteLine(@"say ""help"" to get help");
+                    case ShopOp.none:
+                        break;
+                    case ShopOp.WCIB:
+                        S_WCIB();
+                        break;
+                    case ShopOp.GO:
+                        Console.WriteLine("the ShopKeeper: " + ShopKeeperOut[RNG.Next(0, ShopKeeperOut.Length)]);
+                        EnR = true;
+                        En = false;
+                        break;
+                    case ShopOp.buy:
+                        S_Buy();
+                        break;
+                    case ShopOp.wcidih:
+                        Console.WriteLine(@"say ""help"" to get help");
+                        break;
+                    case ShopOp.help:
+                        Console.WriteLine(Help);
+                        break;
+                    default:
+                        break;
                 }
                 User = "";
                 if(EnR == false)
                     Shop(shop, false);
             }
+        }
+        ShopOp UserToShopOp(string user)
+        {
+            ShopOp Re = ShopOp.none; 
+            switch (user)
+            {
+                case "WCIB":
+                    Re = ShopOp.WCIB;
+                    break;
+                case "GO":
+                    Re = ShopOp.GO;
+                    break;
+                case "buy":
+                    Re = ShopOp.buy;
+                    break;
+                case "wcidih":
+                    Re = ShopOp.wcidih;
+                    break;
+                case "help":
+                    Re = ShopOp.help;
+                    break;
+            }
+            return Re;
         }
         void S_setup(Random RNG, bool start)
         {
