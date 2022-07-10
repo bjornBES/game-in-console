@@ -14,28 +14,21 @@ namespace game_in_console.map
         public string DunMap;
         public void Start()
         {
-            TownMap[TownIndex] = @"    Shop             Craft    ";
-            TownIndex++;
-            TownMap[TownIndex] = @" ___________      ___________ ";
-            TownIndex++;
-            TownMap[TownIndex] = @"/           \    /           \";
-            TownIndex++;
-            TownMap[TownIndex] = @"|           |    |           |";
-            TownIndex++;
-            TownMap[TownIndex] = @"|           |    |           |";
-            TownIndex++;
-            TownMap[TownIndex] = @"____________________________________________________";
-            TownIndex++;
-            TownMap[TownIndex] = @"____________________________________________________";
-            TownIndex++;
-            TownMap[TownIndex] = @"____________________________________________________";
+            TownMap[0] = @"    Shop             Craft                           ";
+            TownMap[1] = @" ___________      ___________                        ";
+            TownMap[2] = @"/           \    /           \                       ";
+            TownMap[3] = @"|           |    |           |                       ";
+            TownMap[4] = @"|           |    |           |                       ";
+            TownMap[5] = @"____________________________________________________ ";
+            TownMap[6] = @"____________________________________________________ ";
+            TownMap[7] = @"____________________________________________________ ";
             WorldMap[0] = @"Strombard       Firestromb";
             WorldMap[1] = @"######         ##";
             WorldMap[2] = @"#####          ###";
             WorldMap[3] = @"####          ////";
             WorldMap[4] = @"\\\\         ////";
             WorldMap[5] = @" \\\\||||||\////";
-            WorldMap[6] = @"  \\|||||||\\\\";
+            WorldMap[6] = @"  \\|||||||\\\\";   
             WorldMap[7] = @" the wild   \\\\";
         }
     }

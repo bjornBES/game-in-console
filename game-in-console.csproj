@@ -6,4 +6,8 @@
     <RootNamespace>game_in_console</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Shoping\Class\" />
+  </ItemGroup>
+
 </Project>
