@@ -3,6 +3,7 @@ using game_in_console.map;
 using game_in_console.enums;
 using game_in_console.crafting;
 using game_in_console.Shoping;
+using game_in_console.NPC.Name;
 namespace game_in_console.Shoping.Class
 {
 
@@ -25,12 +26,6 @@ namespace game_in_console.enums
 }
 namespace game_in_console
 {
-    public class ShopItemsList
-    {
-        public string name;
-        public int Con;
-        public int cost;
-    }
     class Program
     {
         float PlayerX, PlayerY;
@@ -39,6 +34,7 @@ namespace game_in_console
         Map Map;
         CraftItems craft;
         Shoping.shop Shop;
+        NPCNames NPCNames;
         
         string PlayerName;
         
@@ -49,59 +45,28 @@ namespace game_in_console
         }
         void To()
         {
-            Console.WriteLine("Hello " + PlayerName);
-            Console.WriteLine("You: " + "where am i? and who are you?");
-            Console.WriteLine("i am Bolvar and you are in Strombard");
-            Console.WriteLine("You: " + "you said where?");
-            Console.WriteLine("Bolvar: " + "do you have a map?");
-            Console.WriteLine("say no to lie or say yes to not lie");
-            string User = Console.ReadLine();
-            if (User == "yes" || User == "Yes" || User == "y" || User == "Y")
-            {
-                Console.WriteLine("You: " + "yes i have a map");
-                Console.WriteLine("Bolvar: " + "yes yes can you open it");
-            }
-            if (User == "no" || User == "No" || User == "n" || User == "N")
-
-            {
-                Console.WriteLine("You: " + "no i do not have a map");
-                Console.WriteLine("Bolvar: " + "ok here take this map and open it");
-            }
-            Console.WriteLine(@"say ""WorldMap"" to open your map");
-            User = "";
-            User = Console.ReadLine();
-            if (User == "WorldMap" || User == "worldmap" || User == "wm" || User == "WM")
-            {
-                for (int i = 0; i < Map.WorldMap.Length; i++)
-                {
-                    Console.WriteLine(Map.WorldMap[i]);
-                }
-            }
-            Console.WriteLine("You: " + "what is Firestormb and what is the wild?");
-            Console.WriteLine("Bolvar: " + "Firestromb is a friend and the wild is a place where no one has gone to in over 1000 years");
-            Console.WriteLine("You: " + "what... over 1000 years :O ");
-            Console.WriteLine("Bolvar: " + "if you want to go there you need to train for it");
-            Console.WriteLine("Bolvar: " + "get your gear at the shop");
-            Console.WriteLine(@"say ""shop"" to go to the shop");
+            NPCNames = new NPCNames();
+            NPCNames.PlayerName = PlayerName;
+            NPCNames._1NPCNameDialog(0, Map);
+            NPCNames._1NPCNameDialog(1, Map);
         }
         void start()
         {
+            #region Get Stuff
             Player = new Player();
             Player.Start();
-
             craft = new crafting.CraftItems();
             craft.Start();
             craft.Player = Player;
-
             Shop = new shop();
             Shop.Player = Player;
-
+            Shop.NPCNames = NPCNames;
             item = new item();
-
             Map = new Map();
             Map.Start();
             PlayerX = Player.GetX();
             PlayerY = Player.GetY();
+            #endregion
             PlayerName = Console.ReadLine();
             if (PlayerName != "skipto")
             {
@@ -128,7 +93,7 @@ namespace game_in_console
                     Console.WriteLine(Player.coins);
                     break;
                 case startOp.Shop:
-                    Shop.Shop(true, false);
+                    Shop.Shop(true, false, false);
                     break;
                 case startOp.Inv:
                     Console.WriteLine("you have");

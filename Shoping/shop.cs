@@ -2,6 +2,17 @@
 using System.Collections.Generic;
 using System.Text;
 using game_in_console.Shoping.Enum;
+using game_in_console.Shoping.Class;
+using game_in_console.NPC.Name;
+namespace game_in_console.Shoping.Class
+{
+    public class ShopItemsList
+    {
+        public string name;
+        public int Con;
+        public int cost;
+    }
+}
 namespace game_in_console.Shoping.Enum
 {
     public enum ShopOp
@@ -18,9 +29,9 @@ namespace game_in_console.Shoping
 {
     public class shop
     {
+        bool _exit = false;
+        public NPCNames NPCNames;
         public Player Player;
-        bool En = false;
-        bool EnR = false;
         int item1 = 0;
         int item2 = 0;
         int item3 = 0;
@@ -32,52 +43,47 @@ namespace game_in_console.Shoping
         int[] cost = { 0, 10, 15, 20, 10 };
         ShopItemsList[] itemsList = new ShopItemsList[3];
         int ItemsListIndex;
-        public void Shop(bool shop, bool start)
+        public void Shop(bool shop, bool start, bool exit)
         {
-            int Items = 3;
-            for (int i = 0; i < itemsList.Length; i++)
+            if(exit == false)
             {
-                itemsList[i] = new ShopItemsList();
-            }
-            string Help = @"you can say ""GO"" or ""GoOut"" to Go out of the shop or if you want to buy stuff say ""what can i buy"" or ""WCIB"" to see what the shopkepper has in stok and then say ""buy"" to buy";
-            string[] ShopKeeperOut = { "thanks you and bye", "bye", "farewell hero" };
-            if (shop == true)
-            {
-                Random RNG = new Random();
-                if (En == false)
+                for (int i = 0; i < itemsList.Length; i++)
+                {
+                    itemsList[i] = new ShopItemsList();
+                }
+                string Help = @"you can say ""GO"" or ""GoOut"" to Go out of the shop or if you want to buy stuff say ""what can i buy"" or ""WCIB"" to see what the shopkepper has in stok and then say ""buy"" to buy";
+                if (shop == true)
+                {
+                    Random RNG = new Random();
                     S_setup(RNG, start);
 
-                string User = Console.ReadLine();
-                /*
-                 * if(user == enumAsString ) or Publuc Enum name ; << global then in a method switch(name){case Enum.Vale: break;;}
-                 */
-                switch (UserToShopOp(User))
-                {
-                    case ShopOp.none:
-                        break;
-                    case ShopOp.WCIB:
-                        S_WCIB();
-                        break;
-                    case ShopOp.GO:
-                        Console.WriteLine("the ShopKeeper: " + ShopKeeperOut[RNG.Next(0, ShopKeeperOut.Length)]);
-                        EnR = true;
-                        En = false;
-                        break;
-                    case ShopOp.buy:
-                        S_Buy();
-                        break;
-                    case ShopOp.wcidih:
-                        Console.WriteLine(@"say ""help"" to get help");
-                        break;
-                    case ShopOp.help:
-                        Console.WriteLine(Help);
-                        break;
-                    default:
-                        break;
+                    string User = Console.ReadLine();
+                    switch (UserToShopOp(User))
+                    {
+                        case ShopOp.none:
+                            break;
+                        case ShopOp.WCIB:
+                            S_WCIB();
+                            break;
+                        case ShopOp.GO:
+                            Console.WriteLine(NPCNames.ShopKeeperName + ": " + NPCNames.Dia_ShopKeeperOut[RNG.Next(0, NPCNames.Dia_ShopKeeperOut.Length)]);
+                            _exit = true;
+                            break;
+                        case ShopOp.buy:
+                            S_Buy();
+                            break;
+                        case ShopOp.wcidih:
+                            Console.WriteLine(@"say ""help"" to get help");
+                            break;
+                        case ShopOp.help:
+                            Console.WriteLine(Help);
+                            break;
+                        default:
+                            break;
+                    }
+                    User = "";
+                    Shop(shop, false, _exit);
                 }
-                User = "";
-                if (EnR == false)
-                    Shop(shop, false);
             }
         }
         ShopOp UserToShopOp(string user)
@@ -103,106 +109,176 @@ namespace game_in_console.Shoping
             }
             return Re;
         }
-        void S_setup(Random RNG, bool start)
+        void SetAllItems(int Index)
         {
-            string[] ShopKeeperIn = { "hello what can i do for you?", "it's it not a good day", "The Shop has all the items you need :D" };
+            itemsList[ItemsListIndex].name = Taple[Index];
+            itemsList[ItemsListIndex].Con = Con[Index];
+            itemsList[ItemsListIndex].cost = cost[Index];
+        }
+        void SetNumbers(Random RNG)
+        {
             item1 = RNG.Next(0, Taple.Length);
             item2 = RNG.Next(0, Taple.Length);
             item3 = RNG.Next(0, Taple.Length);
             if (item2 == item1)
-                item2 = RNG.Next(0, Taple.Length);
-            if (item3 == item2)
+                item2++;
+            if (item2 == item3)
+                item2--;
+            if (item3 == item1)
                 item3++;
+            if (item3 == item2)
+                item3--;
             if (item3 == Taple.Length)
-                item3 -= 2;
-            if (item1 == 0)
-                item1++;
-            if (item2 == 0)
-                item2 += 2;
-            if (item3 == 0)
-                item3 += Taple.Length - 1;
+                item3--;
+        }
+        void S_setup(Random RNG, bool start)
+        {
+            SetNumbers(RNG);
             if (start == false)
-                Console.WriteLine("the ShopKeeper: " + ShopKeeperIn[RNG.Next(0, ShopKeeperIn.Length)]);
-            itemsList[ItemsListIndex].name = Taple[item1];
-            itemsList[ItemsListIndex].Con = Con[item1];
-            itemsList[ItemsListIndex].cost = cost[item1];
+                Console.WriteLine(NPCNames.ShopKeeperName + ": " + NPCNames.Dia_ShopKeeperIn[RNG.Next(0, NPCNames.Dia_ShopKeeperIn.Length)]);
+            SetAllItems(item1);
             ItemsListIndex++;
-            itemsList[ItemsListIndex].name = Taple[item2];
-            itemsList[ItemsListIndex].Con = Con[item2];
-            itemsList[ItemsListIndex].cost = cost[item2];
+            SetAllItems(item2);
             ItemsListIndex++;
-            itemsList[ItemsListIndex].name = Taple[item3];
-            itemsList[ItemsListIndex].Con = Con[item3];
-            itemsList[ItemsListIndex].cost = cost[item3];
-            En = true;
+            SetAllItems(item3);
         }
         void S_WCIB()
         {
-            Console.WriteLine("The ShopKeeper: " + "i have");
+            Console.WriteLine(NPCNames.ShopKeeperName + ": " + "i have");
             for (int i = 0; i < itemsList.Length; i++)
             {
                 Console.WriteLine(itemsList[i].Con + " " + itemsList[i].name + " for " + itemsList[i].cost + ", ");
             }
         }
+        void DeleteingItems(int Index)
+        {
+            Taple[Index] = "";
+            Con[Index] = 0;
+            cost[Index] = 0;
+        }
+        void AddingItemsToInv(int index)
+        {
+            Player.inv[Player.InvIndex] = Taple[index];
+            Player.invCon[Player.InvIndex] = Con[index];
+            Player.InvIndex++;
+        }
+        void BuyItem(int Index, bool buy)
+        {
+            int NeedCoins = Player.coins - cost[Index];
+            switch (buy)
+            {
+                case true:
+                    Console.WriteLine(NPCNames.ShopKeeperName + ": " + "thank you for purchaseing " + Con[Index] + " " + Taple[Index] + " for " + cost[Index]);
+                    break;
+                case false:
+                    Console.WriteLine(NPCNames.ShopKeeperName + ": " + "Sorry but you do not have enough coins you need " + cost[Index] + " coins and you have " + Player.coins + " coins you need " + NeedCoins + " coins");
+                    break;
+            }
+        }
         void S_Buy()
         {
-            Console.WriteLine("the ShopKeeper: " + "what to buy?");
+            Console.WriteLine(NPCNames.ShopKeeperName + ": " + "what to buy?");
             Console.WriteLine("to a buy a thing you need to say the item number eg " + "item1 to buy " + Con[item1] + " " + Taple[item1] + " for " + cost[item1]);
             string UserBuy = Console.ReadLine();
-            #region Buy Item1
-            if (UserBuy == "item1" || UserBuy == "Item1")
+            switch (UserBuy)
             {
-                if (Player.coins >= cost[item1])
-                {
-                    Player.inv[Player.InvIndex] = Taple[item1];
-                    Player.invCon[Player.InvIndex] = Con[item1];
-                    Player.InvIndex++;
-                    Console.WriteLine("the ShopKeeper: " + "thank you for purchaseing " + Con[item1] + " " + Taple[item1] + " for " + cost[item1]);
-                    Player.coins -= cost[item1];
-                    Taple[item1] = "";
-                    Con[item1] = 0;
-                    cost[item1] = 0;
-                }
-                else
-                    Console.WriteLine("the ShopKeeper: " + "Sorry but you do not have enough coins you need " + cost[item1] + " coins");
+                case "Item1":
+                    #region Buy Item1
+                    if (Player.coins >= cost[item1])
+                    {
+                        //geting the items to Player Inv
+                        AddingItemsToInv(item1);
+                        BuyItem(item1, true);
+                        //sub the coins form the player
+                        Player.coins -= cost[item1];
+                        //deleteing the items form the shop
+                        DeleteingItems(item1);
+                    }
+                    else
+                        BuyItem(item1, false);
+                    #endregion
+                    break;
+                case "item1":
+                    #region Buy Item1
+                    if (Player.coins >= cost[item1])
+                    {
+                        //geting the items to Player Inv
+                        AddingItemsToInv(item1);
+                        BuyItem(item1, true);
+                        //sub the coins form the player
+                        Player.coins -= cost[item1];
+                        //deleteing the items form the shop
+                        DeleteingItems(item1);
+                    }
+                    else
+                        BuyItem(item1, false);
+                    #endregion
+                    break;
+                case "Item2":
+                    #region Buy Item2
+                    if (Player.coins >= cost[item2])
+                    {
+                        //geting the items to Player Inv
+                        AddingItemsToInv(item2);
+                        BuyItem(item2, true);
+                        //sub the coins form the player
+                        Player.coins -= cost[item3];
+                        //deleteing the items form the shop
+                        DeleteingItems(item3);
+                    }
+                    else
+                        BuyItem(item2, false);
+                    #endregion
+                    break;
+                case "item2":
+                    #region Buy Item2
+                    if (Player.coins >= cost[item2])
+                    {
+                        //geting the items to Player Inv
+                        AddingItemsToInv(item2);
+                        BuyItem(item2, true);
+                        //sub the coins form the player
+                        Player.coins -= cost[item3];
+                        //deleteing the items form the shop
+                        DeleteingItems(item3);
+                    }
+                    else
+                        BuyItem(item2, false);
+                    #endregion
+                    break;
+                case "Item3":
+                    #region Buy Item3
+                    if (Player.coins >= cost[item3])
+                    {
+                        //geting the items to Player Inv
+                        AddingItemsToInv(item3);
+                        BuyItem(item3, true);
+                        //sub the coins form the player
+                        Player.coins -= cost[item3];
+                        //deleteing the items form the shop
+                        DeleteingItems(item3);
+                    }
+                    else
+                        BuyItem(item3, false);
+                    #endregion
+                    break;
+                case "item3":
+                    #region Buy Item3
+                    if (Player.coins >= cost[item3])
+                    {
+                        //geting the items to Player Inv
+                        AddingItemsToInv(item3);
+                        BuyItem(item3, true);
+                        //sub the coins form the player
+                        Player.coins -= cost[item3];
+                        //deleteing the items form the shop
+                        DeleteingItems(item3);
+                    }
+                    else
+                        BuyItem(item3, false);
+                    #endregion
+                    break;
             }
-            #endregion
-            #region Buy Item2
-            if (UserBuy == "item2" || UserBuy == "Item2")
-            {
-                if (Player.coins >= cost[item2])
-                {
-                    Player.inv[Player.InvIndex] = Taple[item2];
-                    Player.invCon[Player.InvIndex] = Con[item2];
-                    Player.InvIndex++;
-                    Console.WriteLine("the ShopKeeper: " + "thank you for purchaseing " + Con[item2] + " " + Taple[item2] + " for " + cost[item2]);
-                    Player.coins -= cost[item2];
-                    Taple[item2] = "";
-                    Con[item2] = 0;
-                    cost[item2] = 0;
-                }
-                else
-                    Console.WriteLine("the ShopKeeper: " + "Sorry but you do not have enough coins you need " + cost[item2] + " coins");
-            }
-            #endregion
-            #region Buy Item3
-            if (UserBuy == "item3" || UserBuy == "Item3")
-            {
-                if (Player.coins >= cost[item3])
-                {
-                    Player.inv[Player.InvIndex] = Taple[item3];
-                    Player.invCon[Player.InvIndex] = Con[item3];
-                    Player.InvIndex++;
-                    Console.WriteLine("the ShopKeeper: " + "thank you for purchaseing " + Con[item3] + " " + Taple[item3] + " for " + cost[item3]);
-                    Player.coins -= cost[item3];
-                    Taple[item3] = "";
-                    Con[item3] = 0;
-                    cost[item3] = 0;
-                }
-                else
-                    Console.WriteLine("the ShopKeeper: " + "Sorry but you do not have enough coins you need " + cost[item3] + " coins");
-            }
-            #endregion
         }
     }
 }
