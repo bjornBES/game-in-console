@@ -30,7 +30,7 @@ namespace game_in_console.Shoping
     public class shop
     {
         bool _exit = false;
-        public NPCNames NPCNames;
+        public NPCNames nPCNames;
         public Player Player;
         int item1 = 0;
         int item2 = 0;
@@ -47,15 +47,19 @@ namespace game_in_console.Shoping
         {
             if(exit == false)
             {
-                for (int i = 0; i < itemsList.Length; i++)
+                if(start == true)
                 {
-                    itemsList[i] = new ShopItemsList();
+                    for (int i = 0; i < itemsList.Length; i++)
+                    {
+                        itemsList[i] = new ShopItemsList();
+                    }
                 }
                 string Help = @"you can say ""GO"" or ""GoOut"" to Go out of the shop or if you want to buy stuff say ""what can i buy"" or ""WCIB"" to see what the shopkepper has in stok and then say ""buy"" to buy";
                 if (shop == true)
                 {
                     Random RNG = new Random();
-                    S_setup(RNG, start);
+                    if(start == true)
+                        S_setup(RNG, start);
 
                     string User = Console.ReadLine();
                     switch (UserToShopOp(User))
@@ -66,7 +70,7 @@ namespace game_in_console.Shoping
                             S_WCIB();
                             break;
                         case ShopOp.GO:
-                            Console.WriteLine(NPCNames.ShopKeeperName + ": " + NPCNames.Dia_ShopKeeperOut[RNG.Next(0, NPCNames.Dia_ShopKeeperOut.Length)]);
+                            Console.WriteLine(nPCNames.ShopKeeperName + ": " + nPCNames.Dia_ShopKeeperOut[RNG.Next(0, nPCNames.Dia_ShopKeeperOut.Length)]);
                             _exit = true;
                             break;
                         case ShopOp.buy:
@@ -117,9 +121,9 @@ namespace game_in_console.Shoping
         }
         void SetNumbers(Random RNG)
         {
-            item1 = RNG.Next(0, Taple.Length);
-            item2 = RNG.Next(0, Taple.Length);
-            item3 = RNG.Next(0, Taple.Length);
+            item1 = RNG.Next(1, Taple.Length);
+            item2 = RNG.Next(1, Taple.Length);
+            item3 = RNG.Next(1, Taple.Length);
             if (item2 == item1)
                 item2++;
             if (item2 == item3)
@@ -130,12 +134,14 @@ namespace game_in_console.Shoping
                 item3--;
             if (item3 == Taple.Length)
                 item3--;
+            if (item3 == Taple.Length)
+                item2 -= 2;
         }
         void S_setup(Random RNG, bool start)
         {
             SetNumbers(RNG);
             if (start == false)
-                Console.WriteLine(NPCNames.ShopKeeperName + ": " + NPCNames.Dia_ShopKeeperIn[RNG.Next(0, NPCNames.Dia_ShopKeeperIn.Length)]);
+                Console.WriteLine(nPCNames.ShopKeeperName + ": " + nPCNames.Dia_ShopKeeperIn[RNG.Next(0, nPCNames.Dia_ShopKeeperIn.Length)]);
             SetAllItems(item1);
             ItemsListIndex++;
             SetAllItems(item2);
@@ -144,7 +150,7 @@ namespace game_in_console.Shoping
         }
         void S_WCIB()
         {
-            Console.WriteLine(NPCNames.ShopKeeperName + ": " + "i have");
+            Console.WriteLine(nPCNames.ShopKeeperName + ": " + "i have");
             for (int i = 0; i < itemsList.Length; i++)
             {
                 Console.WriteLine(itemsList[i].Con + " " + itemsList[i].name + " for " + itemsList[i].cost + ", ");
@@ -168,16 +174,16 @@ namespace game_in_console.Shoping
             switch (buy)
             {
                 case true:
-                    Console.WriteLine(NPCNames.ShopKeeperName + ": " + "thank you for purchaseing " + Con[Index] + " " + Taple[Index] + " for " + cost[Index]);
+                    Console.WriteLine(nPCNames.ShopKeeperName + ": " + "thank you for purchaseing " + Con[Index] + " " + Taple[Index] + " for " + cost[Index]);
                     break;
                 case false:
-                    Console.WriteLine(NPCNames.ShopKeeperName + ": " + "Sorry but you do not have enough coins you need " + cost[Index] + " coins and you have " + Player.coins + " coins you need " + NeedCoins + " coins");
+                    Console.WriteLine(nPCNames.ShopKeeperName + ": " + "Sorry but you do not have enough coins you need " + cost[Index] + " coins and you have " + Player.coins + " coins you need " + NeedCoins + " coins");
                     break;
             }
         }
         void S_Buy()
         {
-            Console.WriteLine(NPCNames.ShopKeeperName + ": " + "what to buy?");
+            Console.WriteLine(nPCNames.ShopKeeperName + ": " + "what to buy?");
             Console.WriteLine("to a buy a thing you need to say the item number eg " + "item1 to buy " + Con[item1] + " " + Taple[item1] + " for " + cost[item1]);
             string UserBuy = Console.ReadLine();
             switch (UserBuy)

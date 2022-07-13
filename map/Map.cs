@@ -22,14 +22,14 @@ namespace game_in_console.map
             TownMap[5] = @"____________________________________________________ ";
             TownMap[6] = @"____________________________________________________ ";
             TownMap[7] = @"____________________________________________________ ";
-            WorldMap[0] = @"Strombard       Firestromb";
-            WorldMap[1] = @"######         ##";
-            WorldMap[2] = @"#####          ###";
-            WorldMap[3] = @"####          ////";
-            WorldMap[4] = @"\\\\         ////";
-            WorldMap[5] = @" \\\\||||||\////";
-            WorldMap[6] = @"  \\|||||||\\\\";   
-            WorldMap[7] = @" the wild   \\\\";
+            WorldMap[0] = @"Strombard   IronMake  Firestromb";
+            WorldMap[1] = @"######    ####          ##      ";
+            WorldMap[2] = @"#####    ####          ###      ";
+            WorldMap[3] = @"####     ////       ////        ";
+            WorldMap[4] = @"\\\\    ////       ////         ";
+            WorldMap[5] = @" \\\\|||||||||||\////           ";
+            WorldMap[6] = @"  \\||||||||||\\\\              ";   
+            WorldMap[7] = @" the wild   \\\\_____           ";
         }
     }
 }

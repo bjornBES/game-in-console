@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 namespace game_in_console.enums
 {
@@ -51,6 +51,8 @@ namespace game_in_console
         int MatIndex;
         public void start()
         {
+            string IDB = File.ReadAllText(@"C:\Users\bjornBEs\Source\Repos\game-in-console\items\ItemDatabase.txt").Replace('.','\n');
+            string[] S_IDB = IDB.Split('!', ',');
         }
         public void SetMatItems()
         {

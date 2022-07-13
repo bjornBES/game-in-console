@@ -1,0 +1,2 @@
+﻿Name:!ID:!type[Craft, combat]:
+Coal!1!true,false.

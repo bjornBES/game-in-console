@@ -20,7 +20,7 @@ namespace game_in_console.NPC.Name
             {
                 Console.WriteLine("Hello " + PlayerName);
                 Console.WriteLine("You: " + "where am i? and who are you?");
-                Console.WriteLine("i am" + _1NPCName + "and you are in Strombard");
+                Console.WriteLine("i am " + _1NPCName + " and you are in Strombard");
                 Console.WriteLine("You: " + "you said where?");
                 Console.WriteLine(_1NPCName + ": do you have a map?");
                 Console.WriteLine("say no to lie or say yes to not lie");
@@ -47,11 +47,12 @@ namespace game_in_console.NPC.Name
                         Console.WriteLine(Map.WorldMap[i]);
                     }
                 }
-                Console.WriteLine("You: " + "what is Firestormb and what is the wild?");
+                Console.WriteLine("You: " + "what is Firestormb and IronMake and what is the wild?");
                 Console.WriteLine(_1NPCName + ": " + "Firestromb is a friend and the wild is a place where no one has gone to in over 1000 years");
-                Console.WriteLine("You: " + "what... over 1000 years :O ");
+                Console.WriteLine("You: " + "but what is IronMake? ");
+                Console.WriteLine(_1NPCName + ": " + "IronMake yes... its an enemy we have try to destory them but there are still here ");
                 Console.WriteLine(_1NPCName + ": " + "if you want to go there you need to train for it");
-                Console.WriteLine(_1NPCName + ": " + "get your gear at the shop");
+                Console.WriteLine(_1NPCName + ": " + "get your gear/crafting mat at the shop");
                 Console.WriteLine(@"say ""shop"" to go to the shop");
             }
         }

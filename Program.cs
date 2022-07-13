@@ -4,10 +4,6 @@ using game_in_console.enums;
 using game_in_console.crafting;
 using game_in_console.Shoping;
 using game_in_console.NPC.Name;
-namespace game_in_console.Shoping.Class
-{
-
-}
 
 namespace game_in_console.enums
 {
@@ -45,7 +41,6 @@ namespace game_in_console
         }
         void To()
         {
-            NPCNames = new NPCNames();
             NPCNames.PlayerName = PlayerName;
             NPCNames._1NPCNameDialog(0, Map);
             NPCNames._1NPCNameDialog(1, Map);
@@ -53,6 +48,7 @@ namespace game_in_console
         void start()
         {
             #region Get Stuff
+            NPCNames = new NPCNames();
             Player = new Player();
             Player.Start();
             craft = new crafting.CraftItems();
@@ -60,7 +56,7 @@ namespace game_in_console
             craft.Player = Player;
             Shop = new shop();
             Shop.Player = Player;
-            Shop.NPCNames = NPCNames;
+            Shop.nPCNames = NPCNames;
             item = new item();
             Map = new Map();
             Map.Start();
@@ -93,7 +89,7 @@ namespace game_in_console
                     Console.WriteLine(Player.coins);
                     break;
                 case startOp.Shop:
-                    Shop.Shop(true, false, false);
+                    Shop.Shop(true, true, false);
                     break;
                 case startOp.Inv:
                     Console.WriteLine("you have");
