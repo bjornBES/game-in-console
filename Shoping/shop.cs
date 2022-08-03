@@ -155,6 +155,10 @@ namespace game_in_console.Shoping
             {
                 Console.WriteLine(itemsList[i].Con + " " + itemsList[i].name + " for " + itemsList[i].cost + ", ");
             }
+            if(itemsList[0] == null)
+            {
+                Bug.MessBug(01920, Bugs.craft);
+            }
         }
         void DeleteingItems(int Index)
         {

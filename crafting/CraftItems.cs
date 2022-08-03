@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,76 +16,51 @@ namespace game_in_console.crafting
         public string ItemName4;
         public string ItemName5;
     }
-    public class Re
-    {
-        public string result;
-        public CraftingRe craftingRe = new CraftingRe();
-    }
     public class CraftItems
     {
-        Re[] Re;
-        int CraftReIndex = 2;
-        Mat mat;
+        string res;
+        public CraftingRe Re = new CraftingRe();
         public Player Player;
-        public string CraftintItems = "Stone pickaxe for 3 Stones and 2 Sticks";
         public void Start()
         {
             Player = new Player();
-            Re = new Re[CraftReIndex];
+            Re = new CraftingRe();
+        }
+        /// <summary>
+        /// this is for the craftSystemDataBase
+        /// </summary>
+        /// <returns></returns>
+        string GetData()
+        {
+            return File.ReadAllText(@"C:\Users\bjornBEs\Source\Repos\game-in-console\crafting\CraftSystemDataBase.txt");
+        }
+        string[] TrimAspilt(string Data)
+        {
+            string S_Data = Data.Replace('#', ' ');
+            return S_Data.Split(',', '!', '.', '_');
+        }
+        int FindItem(string[] A_Data, string item)
+        {
+            int Re = -1;
+            for (int i = 0; i < A_Data.Length; i++)
+            {
+                if(item == A_Data[i])
+                {
+                    Re = i;
+                }
+            }
+            return Re;
         }
         public void Craft(string Item)
         {
-            Re[0].craftingRe.ItemName1 = "3 Stones";
-            Re[0].craftingRe.ItemName2 = "2 Sticks";
+            string[] craftRes = TrimAspilt(GetData());
+            if (FindItem(craftRes, Item) == -1)
+                Bug.MessBug(01023, Bugs.shop);
             //make a crafting system 
             for (int i = 0; i < Player.InvIndex; i++)
             {
                 int II = i + 1;
-                if(Item == "SP")
-                {
-                    if(Re[0].craftingRe.ItemName1 == Player.inv[i] + " " + Player.invCon[i] &&
-                        Re[0].craftingRe.ItemName2 == Player.inv[II] + " " + Player.invCon[II])
-                    {
-                        if (Player.invCon[i] == 0)
-                        {
-                            Player.inv[i] = "";
-                            Player.invCon[i] = Player.invCon[i] - 3;
-                            Player.inv[i] = "SP";
-                            Player.invCon[i] = 1;
-                        }
-                        if (Player.invCon[II] == 0)
-                        {
-                            Player.inv[II] = "";
-                            Player.invCon[II] = Player.invCon[II] - 2;
-                            if (Player.inv[i] != "SP")
-                            {
-                                Player.inv[II] = "SP";
-                                Player.invCon[II] = 1;
-                            }
-                        }
-                    }
-                    if (Re[0].craftingRe.ItemName2 == Player.inv[i] + " " + Player.invCon[i] &&
-                        Re[0].craftingRe.ItemName1 == Player.inv[II] + " " + Player.invCon[II])
-                    {
-                        if (Player.invCon[II] == 0)
-                        {
-                            Player.inv[II] = "";
-                            Player.invCon[II] = Player.invCon[II] - 3;
-                            if(Player.inv[i] != "SP")
-                            {
-                                Player.inv[II] = "SP";
-                                Player.invCon[II] = 1;
-                            }
-                        }
-                        if (Player.invCon[i] == 0)
-                        {
-                            Player.inv[i] = "";
-                            Player.invCon[i] = Player.invCon[i] - 2;
-                            Player.inv[i] = "SP";
-                            Player.invCon[i] = 1;
-                        }
-                    }
-                }
+
             }
         }
     }

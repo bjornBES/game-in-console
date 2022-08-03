@@ -4,6 +4,8 @@ using game_in_console.enums;
 using game_in_console.crafting;
 using game_in_console.Shoping;
 using game_in_console.NPC.Name;
+using game_in_console.dun;
+using game_in_console.dun.enemys;
 
 namespace game_in_console.enums
 {
@@ -24,12 +26,12 @@ namespace game_in_console
 {
     class Program
     {
-        float PlayerX, PlayerY;
         Player Player;
+        Dun Dun;
         item item;
         Map Map;
         CraftItems craft;
-        Shoping.shop Shop;
+        shop Shop;
         NPCNames NPCNames;
         
         string PlayerName;
@@ -51,7 +53,7 @@ namespace game_in_console
             NPCNames = new NPCNames();
             Player = new Player();
             Player.Start();
-            craft = new crafting.CraftItems();
+            craft = new CraftItems();
             craft.Start();
             craft.Player = Player;
             Shop = new shop();
@@ -60,8 +62,8 @@ namespace game_in_console
             item = new item();
             Map = new Map();
             Map.Start();
-            PlayerX = Player.GetX();
-            PlayerY = Player.GetY();
+            Dun = new Dun();
+            Dun.Map = Map;
             #endregion
             PlayerName = Console.ReadLine();
             if (PlayerName != "skipto")
@@ -102,16 +104,10 @@ namespace game_in_console
                     Craft(true);
                     break;
                 case startOp.WorldMap:
-                    for (int i = 0; i < Map.WorldMap.Length; i++)
-                    {
-                        Console.WriteLine(Map.WorldMap[i]);
-                    }
+                        Console.WriteLine(Map.WorldMap);
                     break;
                 case startOp.TownMap:
-                    for (int i = 0; i < Map.TownMap.Length; i++)
-                    {
-                        Console.WriteLine(Map.TownMap[i]);
-                    }
+                        Console.WriteLine(Map.TownMap);
                     break;
                 default:
                     break;
@@ -123,6 +119,7 @@ namespace game_in_console
             if(Bool == true)
             {
                 Player.StartDun();
+                Dun.Start();
             }
             else
             {
@@ -189,7 +186,7 @@ namespace game_in_console
             if (UserCraft == "Help" || UserCraft == "help")
                 Console.WriteLine(Help);
             if (UserCraft == "what can i craft" || UserCraft == "wcic" || UserCraft == "WCIC")
-                Console.WriteLine(craft.CraftintItems);
+                Console.WriteLine("HW");
             if (UserCraft == "Craft" || UserCraft == "craft")
             {
                 Console.WriteLine("what to craft");

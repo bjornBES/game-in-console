@@ -6,30 +6,39 @@ using System.Threading.Tasks;
 
 namespace game_in_console.map
 {
+    public class Level1
+    {
+        public string DunRoomMap1 = " ";
+        public string DunRoomMap2 = " ";
+        public string DunRoomMap3 = " ";
+        public string DunRoomMap4 = " ";
+        public string DunRoomMap5 = " ";
+    }
     public class Map
     {
-        public string[] TownMap = new string[8];
-        public int TownIndex;
-        public string[] WorldMap = new string[8];
-        public string DunMap;
+        public string TownMap = "";
+        public string WorldMap = "";
+        public Level1 Level1 = new Level1();
         public void Start()
         {
-            TownMap[0] = @"    Shop             Craft                           ";
-            TownMap[1] = @" ___________      ___________                        ";
-            TownMap[2] = @"/           \    /           \                       ";
-            TownMap[3] = @"|           |    |           |                       ";
-            TownMap[4] = @"|           |    |           |                       ";
-            TownMap[5] = @"____________________________________________________ ";
-            TownMap[6] = @"____________________________________________________ ";
-            TownMap[7] = @"____________________________________________________ ";
-            WorldMap[0] = @"Strombard   IronMake  Firestromb";
-            WorldMap[1] = @"######    ####          ##      ";
-            WorldMap[2] = @"#####    ####          ###      ";
-            WorldMap[3] = @"####     ////       ////        ";
-            WorldMap[4] = @"\\\\    ////       ////         ";
-            WorldMap[5] = @" \\\\|||||||||||\////           ";
-            WorldMap[6] = @"  \\||||||||||\\\\              ";   
-            WorldMap[7] = @" the wild   \\\\_____           ";
+            TownMap =
+          @"    Shop             Craft                          " + "\n" +
+           " ___________      ___________                       " + "\n" +
+          @"/###########\    /###########\                      " + "\n" +
+           "|###########|    |###########|                      " + "\n" +
+           "|#####()####|    |#####()####|                      " + "\n" +
+           "____________________________________________________" + "\n" +
+           "____________________________________________________" + "\n" +
+           "____________________________________________________" + "\n";
+            WorldMap =
+          @"Strombard   IronMake  Firestromb " + "\n" +
+           "######    ####          ##       " + "\n" +
+           "#####    ####          ###       " + "\n" +
+           "####     ////       ////         " + "\n" +
+          @"\\\\    ////       ////          " + "\n" +
+          @" \\\\|||||||||||\////            " + "\n" +
+          @"  \\||||||||||\\\\               " + "\n" +
+          @" the wild   \\\\_____            " + "\n";;
         }
     }
 }
