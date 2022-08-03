@@ -1,38 +1,14 @@
 ﻿using System;
 using game_in_console.map;
-using game_in_console.enums;
 using game_in_console.crafting;
 using game_in_console.Shoping;
 using game_in_console.NPC.Name;
 using game_in_console.dun;
 using game_in_console.dun.enemys;
-
-namespace game_in_console.enums
-{
-    public enum startOp
-    {
-        none,
-        StartDun,//SD
-        Run,
-        How_many_coins_go_i_have, //hmcgih coins
-        Shop, //shop
-        Inv, //inv
-        Craft, //craft
-        WorldMap,
-        TownMap,
-    }
-}
 namespace game_in_console
 {
-    class Program
+    class Program : GameEMain.GameE
     {
-        Player Player;
-        Dun Dun;
-        item item;
-        Map Map;
-        CraftItems craft;
-        shop Shop;
-        NPCNames NPCNames;
         
         string PlayerName;
         
@@ -49,22 +25,7 @@ namespace game_in_console
         }
         void start()
         {
-            #region Get Stuff
-            NPCNames = new NPCNames();
-            Player = new Player();
-            Player.Start();
-            craft = new CraftItems();
-            craft.Start();
-            craft.Player = Player;
-            Shop = new shop();
-            Shop.Player = Player;
-            Shop.nPCNames = NPCNames;
-            item = new item();
-            Map = new Map();
-            Map.Start();
-            Dun = new Dun();
-            Dun.Map = Map;
-            #endregion
+            Start();
             PlayerName = Console.ReadLine();
             if (PlayerName != "skipto")
             {

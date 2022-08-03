@@ -5,11 +5,10 @@ using game_in_console.dun.enemys;
 
 namespace game_in_console.dun
 {
-    public class Dun
+    public class Dun : GameEMain.GameE
     {
         Data EnemyData;
         int DunLevel;
-        public map.Map Map;
 
         int Enemylimit = 11;
         int enemyC = 0;
@@ -101,19 +100,19 @@ namespace game_in_console.dun
                 switch (s)
                 {
                     case 0:
-                        Map.Level1.DunRoomMap1 = TempDunRoom;
+                        Level1.DunRoomMap1 = TempDunRoom;
                         break;
                     case 1:
-                        Map.Level1.DunRoomMap2 = TempDunRoom;
+                        Level1.DunRoomMap2 = TempDunRoom;
                         break;
                     case 2:
-                        Map.Level1.DunRoomMap3 = TempDunRoom;
+                        Level1.DunRoomMap3 = TempDunRoom;
                         break;
                     case 3:
-                        Map.Level1.DunRoomMap4 = TempDunRoom;
+                        Level1.DunRoomMap4 = TempDunRoom;
                         break;
                     case 4:
-                        Map.Level1.DunRoomMap5 = TempDunRoom;
+                        Level1.DunRoomMap5 = TempDunRoom;
                         break;
                     case 5:
                         break;

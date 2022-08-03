@@ -9,21 +9,21 @@ namespace game_in_console.dun.enemys
         public string name;
         public int Hp;
         public int Dps;
-        public int C;
-        public int DunLevel;
         public int StartLevel;
     }
-    public class BossData
+    public class EnemyData : Data
     {
-        public string name;
-        public int Hp;
-        public int Dps;
+        public int C;
         public int DunLevel;
     }
-    public class Enemydata
+    public class BossData : Data
+    {
+        public int DunLevel;
+    }
+    public class EnemyCom
     {
         public BossData[] BossData = new BossData[100];
-        public Data[] Data = new Data[100];
+        public EnemyData[] Data = new EnemyData[100];
         int enemyIndex = 0;
         int BossDataIndex = 0;
         public void addenemy(string name, int Hp, int Dps, int Chane, int DunLevel, int Level)
@@ -45,7 +45,7 @@ namespace game_in_console.dun.enemys
     }
     public class enemy
     {
-        static Enemydata data = new Enemydata();
+        static EnemyCom data = new EnemyCom();
         enemy()
         {
             data.addenemy("Test", 25, 1, 50, 1, 1);
@@ -54,7 +54,7 @@ namespace game_in_console.dun.enemys
         }
         public static Data GetEnemy(string name)
         {
-            Data Re = new Data();
+            EnemyData Re = new EnemyData();
             for (int i = 0; i < data.Data.Length; i++)
             {
                 if(data.Data[i].name == name)

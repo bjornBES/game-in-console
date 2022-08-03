@@ -3,17 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using game_in_console.enums;
 
 namespace game_in_console
 {
-    public enum city
-    {
-        Strombard,
-        ironmake,
-        firestromb,
-        the_roads
-    }
     public class Player
     {
         public bool IsDun;

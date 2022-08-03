@@ -16,16 +16,10 @@ namespace game_in_console.crafting
         public string ItemName4;
         public string ItemName5;
     }
-    public class CraftItems
+    public class CraftItems : GameEMain.GameE
     {
         string res;
         public CraftingRe Re = new CraftingRe();
-        public Player Player;
-        public void Start()
-        {
-            Player = new Player();
-            Re = new CraftingRe();
-        }
         /// <summary>
         /// this is for the craftSystemDataBase
         /// </summary>

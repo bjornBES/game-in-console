@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using game_in_console.Shoping.Enum;
 using game_in_console.Shoping.Class;
 using game_in_console.NPC.Name;
 namespace game_in_console.Shoping.Class
@@ -13,34 +12,17 @@ namespace game_in_console.Shoping.Class
         public int cost;
     }
 }
-namespace game_in_console.Shoping.Enum
-{
-    public enum ShopOp
-    {
-        none,
-        WCIB,
-        GO,
-        buy,
-        wcidih,
-        help
-    }
-}
 namespace game_in_console.Shoping
 {
-    public class shop
+    public class shop : GameEMain.GameE
     {
         bool _exit = false;
-        public NPCNames nPCNames;
-        public Player Player;
         int item1 = 0;
         int item2 = 0;
         int item3 = 0;
         /// <summary>
         /// a taple for all the items you can get!
         /// </summary>
-        string[] Taple = { "em", "Sticks", "Stones", "irons", "flints" };
-        int[] Con = { 0, 2, 3, 2, 2 };
-        int[] cost = { 0, 10, 15, 20, 10 };
         ShopItemsList[] itemsList = new ShopItemsList[3];
         int ItemsListIndex;
         public void Shop(bool shop, bool start, bool exit)
@@ -70,7 +52,7 @@ namespace game_in_console.Shoping
                             S_WCIB();
                             break;
                         case ShopOp.GO:
-                            Console.WriteLine(nPCNames.ShopKeeperName + ": " + nPCNames.Dia_ShopKeeperOut[RNG.Next(0, nPCNames.Dia_ShopKeeperOut.Length)]);
+                            Console.WriteLine(NPCNames.ShopKeeperName + ": " + NPCNames.Dia_ShopKeeperOut[RNG.Next(0, NPCNames.Dia_ShopKeeperOut.Length)]);
                             _exit = true;
                             break;
                         case ShopOp.buy:
@@ -141,7 +123,7 @@ namespace game_in_console.Shoping
         {
             SetNumbers(RNG);
             if (start == false)
-                Console.WriteLine(nPCNames.ShopKeeperName + ": " + nPCNames.Dia_ShopKeeperIn[RNG.Next(0, nPCNames.Dia_ShopKeeperIn.Length)]);
+                Console.WriteLine(NPCNames.ShopKeeperName + ": " + NPCNames.Dia_ShopKeeperIn[RNG.Next(0, NPCNames.Dia_ShopKeeperIn.Length)]);
             SetAllItems(item1);
             ItemsListIndex++;
             SetAllItems(item2);
@@ -150,7 +132,7 @@ namespace game_in_console.Shoping
         }
         void S_WCIB()
         {
-            Console.WriteLine(nPCNames.ShopKeeperName + ": " + "i have");
+            Console.WriteLine(NPCNames.ShopKeeperName + ": " + "i have");
             for (int i = 0; i < itemsList.Length; i++)
             {
                 Console.WriteLine(itemsList[i].Con + " " + itemsList[i].name + " for " + itemsList[i].cost + ", ");
@@ -178,16 +160,16 @@ namespace game_in_console.Shoping
             switch (buy)
             {
                 case true:
-                    Console.WriteLine(nPCNames.ShopKeeperName + ": " + "thank you for purchaseing " + Con[Index] + " " + Taple[Index] + " for " + cost[Index]);
+                    Console.WriteLine(NPCNames.ShopKeeperName + ": " + "thank you for purchaseing " + Con[Index] + " " + Taple[Index] + " for " + cost[Index]);
                     break;
                 case false:
-                    Console.WriteLine(nPCNames.ShopKeeperName + ": " + "Sorry but you do not have enough coins you need " + cost[Index] + " coins and you have " + Player.coins + " coins you need " + NeedCoins + " coins");
+                    Console.WriteLine(NPCNames.ShopKeeperName + ": " + "Sorry but you do not have enough coins you need " + cost[Index] + " coins and you have " + Player.coins + " coins you need " + NeedCoins + " coins");
                     break;
             }
         }
         void S_Buy()
         {
-            Console.WriteLine(nPCNames.ShopKeeperName + ": " + "what to buy?");
+            Console.WriteLine(NPCNames.ShopKeeperName + ": " + "what to buy?");
             Console.WriteLine("to a buy a thing you need to say the item number eg " + "item1 to buy " + Con[item1] + " " + Taple[item1] + " for " + cost[item1]);
             string UserBuy = Console.ReadLine();
             switch (UserBuy)

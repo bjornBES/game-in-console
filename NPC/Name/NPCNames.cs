@@ -4,7 +4,7 @@ using System.Text;
 
 namespace game_in_console.NPC.Name
 {
-    public class NPCNames
+    public class NPCNames : GameEMain.GameE
     {
         public string _1NPCName = "Bolvar";
         public string ShopKeeperName = "TheShopKeeper";
@@ -14,7 +14,7 @@ namespace game_in_console.NPC.Name
         public void _ShopKeeperDialog()
         { 
         }
-        public void _1NPCNameDialog(int Dialog, map.Map Map)
+        public void _1NPCNameDialog(int Dialog)
         {
             if(Dialog == 0)
             {
