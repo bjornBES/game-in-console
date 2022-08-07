@@ -8,7 +8,7 @@ namespace game_in_console.dun
     public class Dun : GameEMain.GameE
     {
         Data EnemyData;
-        int DunLevel;
+        int DunLevel { get; set; } = 1;
 
         int Enemylimit = 11;
         int enemyC = 0;
@@ -18,7 +18,7 @@ namespace game_in_console.dun
         /// <summary>
         /// this is the start fun not the start Dun
         /// </summary>
-        public void Start()
+        public void D_Start()
         {
             GenDun();
             if(DunLevel > 7)
@@ -57,6 +57,10 @@ namespace game_in_console.dun
                     Rooms = 22;
                     break;
             }
+        }
+        public void update()
+        {
+
         }
         Random random;
         void GenDun()

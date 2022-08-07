@@ -42,10 +42,7 @@ namespace game_in_console.NPC.Name
                 string User = Console.ReadLine();
                 if (User == "WorldMap" || User == "worldmap" || User == "wm" || User == "WM")
                 {
-                    for (int i = 0; i < Map.WorldMap.Length; i++)
-                    {
-                        Console.WriteLine(Map.WorldMap[i]);
-                    }
+                        Console.WriteLine(WorldMap);
                 }
                 Console.WriteLine("You: " + "what is Firestormb and IronMake and what is the wild?");
                 Console.WriteLine(_1NPCName + ": " + "Firestromb is a friend and the wild is a place where no one has gone to in over 1000 years");

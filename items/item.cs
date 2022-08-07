@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using System.Threading.Tasks;
+using GameEMain;
 namespace game_in_console
 {
     //.SO file ItemInfo Start-
@@ -13,7 +14,7 @@ namespace game_in_console
     //if item == mat 
     //
     [Serializable]
-    public class Mat : GameEMain.GameE
+    public class Mat : GameE
     {
         public string Name;
         public int ID;
@@ -21,7 +22,7 @@ namespace game_in_console
         public float Dy;
         public itemType type;
     }
-    public class item : GameEMain.GameE
+    public class item : GameE
     {
         float matID = 50;
         float WeID = 100;

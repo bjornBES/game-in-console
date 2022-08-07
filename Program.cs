@@ -5,9 +5,23 @@ using game_in_console.Shoping;
 using game_in_console.NPC.Name;
 using game_in_console.dun;
 using game_in_console.dun.enemys;
+using GameEMain;
 namespace game_in_console
 {
-    class Program : GameEMain.GameE
+    public enum startOp
+    {
+        none,
+        StartDun,//SD
+        Run,
+        How_many_coins_go_i_have, //hmcgih coins
+        Shop, //shop
+        Inv, //inv
+        Craft, //craft
+        WorldMap,
+        TownMap,
+        help
+    }
+    class Program : GameE
     {
         
         string PlayerName;
@@ -15,29 +29,53 @@ namespace game_in_console
         static void Main()
         {
             Console.WriteLine("Hello you there what is your name?");
-            Program program = new Program(); program.start();
-        }
-        void To()
-        {
-            NPCNames.PlayerName = PlayerName;
-            NPCNames._1NPCNameDialog(0, Map);
-            NPCNames._1NPCNameDialog(1, Map);
+            Program program = new Program(); 
+            program.start();
         }
         void start()
         {
-            Start();
             PlayerName = Console.ReadLine();
+            Start();
+            if (PlayerName == "devB" || PlayerName == "BEsBB")
+            {
+                Console.WriteLine("Password hint its not 1234 or y4");
+                string Number = Console.ReadLine();
+                if (Number == password.ToString() || Number == "debug" || Number == "db")
+                {
+                    Player.InvIndex++;
+                    Player.inv[0] = items.stick;
+                    Player.invCon[0] = 999;
+                    Player.InvIndex++;
+                    Player.inv[0] = items.stone;
+                    Player.invCon[0] = 999;
+                    Player.InvIndex++;
+                    Player.inv[0] = items.ironIngot;
+                    Player.invCon[0] = 999;
+                    Player.InvIndex++;
+                    Player.inv[0] = items.ironore;
+                    Player.invCon[0] = 999;
+                }
+                else
+                {
+                    Bug.MessBug("196813785696849373228402159147087096127008678178", Bugs.Dev);
+                    PlayerName = "Not devB or not BEsBB";
+                }
+            }
             if (PlayerName != "skipto")
             {
                 To();
             }
             Update();
         }
-        bool First = true;
+        void To()
+        {
+            NPCNames.PlayerName = PlayerName;
+            NPCNames._1NPCNameDialog(0);
+            NPCNames._1NPCNameDialog(1);
+        }
         void Update()
         { 
-            string User = "";
-            User = Console.ReadLine();
+            string User = Console.ReadLine();
             switch (UserToStartOp(User))
             {
                 case startOp.none:
@@ -52,23 +90,26 @@ namespace game_in_console
                     Console.WriteLine(Player.coins);
                     break;
                 case startOp.Shop:
-                    Shop.Shop(true, true, false);
+                    Shop.S_Shop(true, true, false);
                     break;
                 case startOp.Inv:
                     Console.WriteLine("you have");
                     for (int i = 0; i < Player.InvIndex; i++)
                     {
-                        Console.WriteLine(Player.invCon[i] + " " + Player.inv[i] + ", ");
+                        Console.WriteLine(Player.invCon[i].ToString() + " " + Player.inv[i].ToString() + ", ");
                     }
                     break;
                 case startOp.Craft:
                     Craft(true);
                     break;
                 case startOp.WorldMap:
-                        Console.WriteLine(Map.WorldMap);
+                        Console.WriteLine(WorldMap);
                     break;
                 case startOp.TownMap:
-                        Console.WriteLine(Map.TownMap);
+                        Console.WriteLine(TownMap);
+                    break;
+                case startOp.help:
+                    Console.WriteLine();
                     break;
                 default:
                     break;
@@ -92,6 +133,9 @@ namespace game_in_console
             startOp Re = startOp.none;
             switch (user)
             {
+                case "Help":
+                    Re = startOp.help;
+                    break;
                 case "StartDun":
                     Re = startOp.StartDun;
                     break;
@@ -129,6 +173,18 @@ namespace game_in_console
                     Re = startOp.WorldMap;
                     break;
                 case "TownMap":
+                    Re = startOp.TownMap;
+                    break;
+                case "WM":
+                    Re = startOp.WorldMap;
+                    break;
+                case "TM":
+                    Re = startOp.TownMap;
+                    break;
+                case "wm":
+                    Re = startOp.WorldMap;
+                    break;
+                case "tm":
                     Re = startOp.TownMap;
                     break;
             }

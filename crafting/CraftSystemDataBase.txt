@@ -1,1 +1,3 @@
 ﻿2_Stone#pickaxe!3#Stones,2#Sticks.
+2\
+Stone pickaxe\
