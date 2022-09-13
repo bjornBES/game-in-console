@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using game_in_console.Shoping.Class;
 using game_in_console.NPC.Name;
+using game_in_console.bug;
+using game_in_console.enums;
 using GameEMain;
 namespace game_in_console.Shoping.Class
 {
@@ -11,12 +13,15 @@ namespace game_in_console.Shoping.Class
         public items name;
         public int S_Con;
         public int S_cost;
+        public int S_Chance;
     }
 }
 namespace game_in_console.Shoping
 {
-    public class shop : GameEMain.GameE
+    public class shop : GameE
     {
+        bool GetInFrist = true;
+        bool First = true;
         bool _exit = false;
         int item1 = 0;
         int item2 = 0;
@@ -28,11 +33,11 @@ namespace game_in_console.Shoping
         /// </summary>
         ShopItemsList[] itemsList = new ShopItemsList[3];
         int ItemsListIndex;
-        public void S_Shop(bool shop, bool start, bool exit)
+        public void S_Shop(bool shop, bool exit)
         {
             if(exit == false)
             {
-                if(start == true)
+                if(First == true)
                 {
                     for (int i = 0; i < itemsList.Length; i++)
                     {
@@ -43,8 +48,7 @@ namespace game_in_console.Shoping
                 if (shop == true)
                 {
                     Random RNG = new Random();
-                    if(start == true)
-                        S_setup(RNG, start);
+                        S_setup(RNG, First);
 
                     string User = Console.ReadLine();
                     switch (UserToShopOp(User))
@@ -56,6 +60,7 @@ namespace game_in_console.Shoping
                             break;
                         case ShopOp.GO:
                             Console.WriteLine(S_NPC.ShopKeeperName + ": " + S_NPC.Dia_ShopKeeperOut[RNG.Next(0, S_NPC.Dia_ShopKeeperOut.Length)]);
+                            GetInFrist = true;
                             _exit = true;
                             break;
                         case ShopOp.buy:
@@ -71,15 +76,13 @@ namespace game_in_console.Shoping
                             break;
                     }
                     User = "";
-                    S_Shop(shop, false, _exit);
+                    if(_exit == false)
+                        GetInFrist = false;
+                    First = false;
+                    S_Shop(shop, _exit);
                 }
             }
         }
-        /// <summary>
-        /// the op for moveing to the buy or WCIB
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
         ShopOp UserToShopOp(string user)
         {
             ShopOp Re = ShopOp.none;
@@ -119,32 +122,152 @@ namespace game_in_console.Shoping
         /// <param name="RNG"></param>
         void SetNumbers(Random RNG)
         {
-            item1 = RNG.Next(1, Taple.Length);
-            item2 = RNG.Next(1, Taple.Length);
-            item3 = RNG.Next(1, Taple.Length);
-            if (item2 == item1)
-                item2++;
-            if (item2 == item3)
-                item2--;
-            if (item3 == item1)
-                item3++;
-            if (item3 == item2)
-                item3--;
-            if (item3 == Taple.Length)
-                item3--;
-            if (item3 == Taple.Length)
-                item2 -= 2;
+            for (int i = 0; i < 3; i++)
+            {
+                int perCent = RNG.Next(0, 25);
+                if (perCent < 10)
+                {
+                    if (item3 == 0 && item2 != 0 && item1 != 0)
+                        item3 = 6;
+                    if (item2 == 0 && item1 != 0)
+                        item2 = 6;
+                    if (item1 == 0)
+                        item1 = 6;
+                }
+                else if (perCent < 10 + 5)
+                {
+                    if (item3 == 0 && item2 != 0 && item1 != 0)
+                        item3 = 3;
+                    if (item2 == 0 && item1 != 0)
+                        item2 = 3;
+                    if (item1 == 0)
+                        item1 = 3;
+                }
+                else if (perCent < 10 + 10)
+                {
+                    int ff = RNG.Next(0, 100);
+                    if (ff < 50)
+                    {
+                        if (item3 == 0 && item2 != 0 && item1 != 0)
+                            item3 = 5;
+                        if (item2 == 0 && item1 != 0)
+                            item2 = 5;
+                        if (item1 == 0)
+                            item1 = 5;
+                    }
+                    else if (ff < 50 + 50)
+                    {
+                        if (item3 == 0 && item2 != 0 && item1 != 0)
+                            item3 = 2;
+                        if (item2 == 0 && item1 != 0)
+                            item2 = 2;
+                        if (item1 == 0)
+                            item1 = 2;
+                    }
+                }
+                else if (perCent < 10 + 10 + 5)
+                {
+                    int ff = RNG.Next(0, 100);
+                    if (ff < 50)
+                    {
+                        if (item3 == 0 && item2 != 0 && item1 != 0)
+                            item3 = 1;
+                        if (item2 == 0 && item1 != 0)
+                            item2 = 1;
+                        if (item1 == 0)
+                            item1 = 1;
+                    }
+                    else if (ff < 50 + 50)
+                    {
+                        if (item3 == 0 && item2 != 0 && item1 != 0)
+                            item3 = 4;
+                        if (item2 == 0 && item1 != 0)
+                            item2 = 4;
+                        if (item1 == 0)
+                            item1 = 4;
+                    }
+                }
+            }
+            if(item1 == item2 || item2 == item3 || item3 == item1)
+            {
+                int perCent = RNG.Next(0, 25);
+                if (perCent < 10)
+                {
+                    if (item1 == item2)
+                        item2 = 6;
+                    if (item2 == item3)
+                        item3 = 6;
+                    if (item3 == item1)
+                        item1 = 6;
+                }
+                else if (perCent < 10 + 5)
+                {
+                    if (item1 == item2)
+                        item2 = 3;
+                    if (item2 == item3)
+                        item3 = 3;
+                    if (item3 == item1)
+                        item1 = 3;
+                }
+                else if (perCent < 10 + 10)
+                {
+                    int ff = RNG.Next(0, 100);
+                    if (ff < 50)
+                    {
+                        if (item1 == item2)
+                            item2 = 5;
+                        if (item2 == item3)
+                            item3 = 5;
+                        if (item3 == item1)
+                            item1 = 5;
+                    }
+                    else if (ff < 50 + 50)
+                    {
+                        if (item1 == item2)
+                            item2 = 2;
+                        if (item2 == item3)
+                            item3 = 2;
+                        if (item3 == item1)
+                            item1 = 2;
+                    }
+                }
+                else if (perCent < 10 + 10 + 5)
+                {
+                    int ff = RNG.Next(0, 100);
+                    if (ff < 50)
+                    {
+                        if (item1 == item2)
+                            item2 = 1;
+                        if (item2 == item3)
+                            item3 = 1;
+                        if (item3 == item1)
+                            item1 = 1;
+                    }
+                    else if (ff < 50 + 50)
+                    {
+                        if (item1 == item2)
+                            item2 = 4;
+                        if (item2 == item3)
+                            item3 = 4;
+                        if (item3 == item1)
+                            item1 = 4;
+                    }
+                }
+            }
         }
         void S_setup(Random RNG, bool start)
         {
-            SetNumbers(RNG);
-            if (start == true)
+            if(GetInFrist == true)
                 Console.WriteLine(S_NPC.ShopKeeperName + ": " + S_NPC.Dia_ShopKeeperIn[RNG.Next(0, S_NPC.Dia_ShopKeeperIn.Length)]);
-            SetAllItems(item1);
-            ItemsListIndex++;
-            SetAllItems(item2);
-            ItemsListIndex++;
-            SetAllItems(item3);
+            if(start == true)
+            {
+                SetNumbers(RNG);
+                SetAllItems(item1);
+                ItemsListIndex++;
+                SetAllItems(item2);
+                ItemsListIndex++;
+                SetAllItems(item3);
+            }
         }
         void S_WCIB()
         {
@@ -167,9 +290,9 @@ namespace game_in_console.Shoping
         int ChacePlayerInv(items Items)
         {
             int Re = -1;
-            for (int i = 0; i < S_player.inv.Length; i++)
+            for (int i = 0; i < S_player.Inv.Length; i++)
             {
-                if(S_player.inv[i] == Items)
+                if(S_player.Inv[i] == Items)
                 {
                     Re = i;
                 }
@@ -180,26 +303,26 @@ namespace game_in_console.Shoping
         {
             if(ChacePlayerInv(Taple[index]) != -1)
             {
-                S_player.invCon[ChacePlayerInv(Taple[index])] += Con[index];
+                S_player.InvCon[ChacePlayerInv(Taple[index])] += Con[index];
             }
             else
             {
-                S_player.inv[S_player.InvIndex] = Taple[index];
-                S_player.invCon[S_player.InvIndex] = Con[index];
+                S_player.Inv[S_player.InvIndex] = Taple[index];
+                S_player.InvCon[S_player.InvIndex] = Con[index];
                 S_player.InvIndex++;
             }
 
         }
         void BuyItem(int Index, bool buy)
         {
-            int NeedCoins = S_player.coins - cost[Index];
+            int NeedCoins = S_player.Coins - cost[Index];
             switch (buy)
             {
                 case true:
                     Console.WriteLine(S_NPC.ShopKeeperName + ": " + "thank you for purchaseing " + Con[Index] + " " + Taple[Index] + " for " + cost[Index]);
                     break;
                 case false:
-                    Console.WriteLine(S_NPC.ShopKeeperName + ": " + "Sorry but you do not have enough coins you need " + cost[Index] + " coins and you have " + S_player.coins + " coins you need " + NeedCoins + " coins");
+                    Console.WriteLine(S_NPC.ShopKeeperName + ": " + "Sorry but you do not have enough coins you need " + cost[Index] + " coins and you have " + S_player.Coins + " coins you need " + NeedCoins + " coins");
                     break;
             }
         }
@@ -212,13 +335,13 @@ namespace game_in_console.Shoping
             {
                 case "Item1":
                     #region Buy Item1
-                    if (S_player.coins >= cost[item1])
+                    if (S_player.Coins >= cost[item1])
                     {
                         //geting the items to Player Inv
                         S_AddingItemsToInv(item1);
                         BuyItem(item1, true);
                         //sub the coins form the player
-                        S_player.coins -= cost[item1];
+                        S_player.Coins -= cost[item1];
                         //deleteing the items form the shop
                         S_DeleteingItems(item1);
                     }
@@ -228,13 +351,13 @@ namespace game_in_console.Shoping
                     break;
                 case "item1":
                     #region Buy Item1
-                    if (S_player.coins >= cost[item1])
+                    if (S_player.Coins >= cost[item1])
                     {
                         //geting the items to Player Inv
                         S_AddingItemsToInv(item1);
                         BuyItem(item1, true);
                         //sub the coins form the player
-                        S_player.coins -= cost[item1];
+                        S_player.Coins -= cost[item1];
                         //deleteing the items form the shop
                         S_DeleteingItems(item1);
                     }
@@ -244,13 +367,13 @@ namespace game_in_console.Shoping
                     break;
                 case "Item2":
                     #region Buy Item2
-                    if (S_player.coins >= cost[item2])
+                    if (S_player.Coins >= cost[item2])
                     {
                         //geting the items to Player Inv
                         S_AddingItemsToInv(item2);
                         BuyItem(item2, true);
                         //sub the coins form the player
-                        S_player.coins -= cost[item3];
+                        S_player.Coins -= cost[item3];
                         //deleteing the items form the shop
                         S_DeleteingItems(item3);
                     }
@@ -260,13 +383,13 @@ namespace game_in_console.Shoping
                     break;
                 case "item2":
                     #region Buy Item2
-                    if (S_player.coins >= cost[item2])
+                    if (S_player.Coins >= cost[item2])
                     {
                         //geting the items to Player Inv
                         S_AddingItemsToInv(item2);
                         BuyItem(item2, true);
                         //sub the coins form the player
-                        S_player.coins -= cost[item3];
+                        S_player.Coins -= cost[item3];
                         //deleteing the items form the shop
                         S_DeleteingItems(item3);
                     }
@@ -276,13 +399,13 @@ namespace game_in_console.Shoping
                     break;
                 case "Item3":
                     #region Buy Item3
-                    if (S_player.coins >= cost[item3])
+                    if (S_player.Coins >= cost[item3])
                     {
                         //geting the items to Player Inv
                         S_AddingItemsToInv(item3);
                         BuyItem(item3, true);
                         //sub the coins form the player
-                        S_player.coins -= cost[item3];
+                        S_player.Coins -= cost[item3];
                         //deleteing the items form the shop
                         S_DeleteingItems(item3);
                     }
@@ -292,13 +415,13 @@ namespace game_in_console.Shoping
                     break;
                 case "item3":
                     #region Buy Item3
-                    if (S_player.coins >= cost[item3])
+                    if (S_player.Coins >= cost[item3])
                     {
                         //geting the items to Player Inv
                         S_AddingItemsToInv(item3);
                         BuyItem(item3, true);
                         //sub the coins form the player
-                        S_player.coins -= cost[item3];
+                        S_player.Coins -= cost[item3];
                         //deleteing the items form the shop
                         S_DeleteingItems(item3);
                     }

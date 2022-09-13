@@ -3,31 +3,14 @@ using game_in_console.Shoping;
 using game_in_console.NPC.Name;
 using game_in_console.dun;
 using game_in_console.dun.enemys;
+using game_in_console.data.items;
 using game_in_console;
-using game_in_console.map;
+using game_in_console.otherSystem;
+using game_in_console.enums;
 namespace GameEMain
 {
-    #region enum
-    public enum items
-    {
-        none,
-        stone,
-        flint,
-        ironore,
-        ironIngot,
-        coal,
-        stick,
 
-        Ironsword,
-        Ironaxe,
-        woodenSword,
-        woodenAxe,
-    }
-    public enum itemType
-    {
-        craft,
-        combat,
-    }
+    #region enum
     public enum city
     {
         Strombard,
@@ -44,10 +27,18 @@ namespace GameEMain
         wcidih,
         help
     }
+    public enum CraftOp
+    {
+        none,
+        GO,
+        craft,
+        wcic,
+        help
+    }
     #endregion
     public class GameE
     {
-        public string TownMap =
+        public string TownMap { get; } =
           @"    Shop             Craft                          " + "\n" +
            " ___________      ___________                       " + "\n" +
           @"/###########\    /###########\                      " + "\n" +
@@ -56,7 +47,7 @@ namespace GameEMain
            "____________________________________________________" + "\n" +
            "____________________________________________________" + "\n" +
            "____________________________________________________" + "\n";
-        public string WorldMap =
+        public string WorldMap { get; } =
           @"Strombard   IronMake  Firestromb " + "\n" +
            "######    ####          ##       " + "\n" +
            "#####    ####          ###       " + "\n" +
@@ -65,27 +56,29 @@ namespace GameEMain
           @" \\\\|||||||||||\////            " + "\n" +
           @"  \\||||||||||\\\\               " + "\n" +
           @" the wild   \\\\_____            " + "\n";
-        public int password = 3479;
+        public int password { get; } = 3479;
+        public Converter converter;
         public Player Player;
         public Dun Dun;
-        public item item;
         public CraftItems craft;
+        public gear gear;
         public shop Shop { get; set; }
         public NPCNames NPCNames { get; set; }
-        public Level1 Level1;
-        public items[] Taple = { items.none, items.stick, items.stone, items.ironore, items.flint };
-        public int[] Con = { 0, 2, 3, 2, 2 };
-        public int[] cost = { 0, 10, 15, 20, 10 };
+        public OtherSystem mine { get; set; }
+        public items[] Taple { get; } = { items.none, items.stick, items.stone, items.ironore, items.flint, items.coal, items.IronSword};
+        public int[] Con { get; } = { 0, 2, 3, 2, 2, 2, 1 };
+        public int[] cost { get; } = { 0, 10, 15, 20, 10, 15, 100 };
+        public int[] Chance { get; } = { 0, 25, 20, 15, 25, 20, 10};
         public void Start()
         {
             #region Get Stuff
-            //level1
-            Level1 = new Level1();
-            //npc
-            NPCNames = new NPCNames();
+            //converter
+            converter = new Converter();
             //player
             Player = new Player();
-            Player.P_Start();
+            //npc
+            NPCNames = new NPCNames();
+            NPCNames.player = Player;
             //craft
             craft = new CraftItems();
             craft.C_Player = Player;
@@ -93,10 +86,16 @@ namespace GameEMain
             Shop = new shop();
             Shop.S_player = Player;
             Shop.S_NPC = NPCNames;
-            //item
-            item = new item();
             //dun
             Dun = new Dun();
+            Dun.player = Player;
+            Dun.nPCNames = NPCNames;
+            //mine
+            mine = new OtherSystem();
+            mine.player = Player;
+            //gear
+            gear = new gear();
+            gear.Player = Player;
             #endregion
         }
     }

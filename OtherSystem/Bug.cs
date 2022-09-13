@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace game_in_console
+namespace game_in_console.bug
 {
     public enum Bugs
     {
@@ -35,10 +35,14 @@ namespace game_in_console
                 "Shop data can't find item \n " + common);
                     break;
                 case Bugs.craft:
+                    Console.ForegroundColor = ConsoleColor.Red;
                     if (ErrorCode == "01001")
                         Console.WriteLine("Error: \n " + "system can't find Crafting item \n " + common);
                     if (ErrorCode == "01010")
-                        Console.WriteLine("Error: \n " + "System can't find items in inv \n " + common);
+                        Console.WriteLine("Error: \n " + "System can't find Result item \n " + common);
+                    if (ErrorCode == "01011")
+                        Console.WriteLine("Error: \n " + "System take all items \n " + common);
+                    Console.ForegroundColor = ConsoleColor.White;
                     break;
                 case Bugs.item:
                     break;

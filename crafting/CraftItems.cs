@@ -4,95 +4,135 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using game_in_console.bug;
+using game_in_console.enums;
 using GameEMain;
 namespace game_in_console.crafting
 {
-    [Serializable]
-    public class CraftingRe
-    {
-        public string ItemName1;
-        public string ItemName2;
-        public string ItemName3;
-        public string ItemName4;
-        public string ItemName5;
-    }
     public class CraftItems
     {
-        public CraftingRe Re = new CraftingRe();
+        bool Dev;
         public Player C_Player;
-        /// <summary>
-        /// this is for the craftSystemDataBase
-        /// </summary>
-        /// <returns></returns>
-        string GetData()
-        {
-            return File.ReadAllText(@"C:\Users\bjornBEs\Source\Repos\game-in-console\crafting\CraftSystemDataBase.txt");
-        }
-        string[] TrimAspilt(string Data)
-        {
-            string S_Data = Data.Replace('#', ' ');
-            return S_Data.Split(',', '!', '.', '_');
-        }
-        int FindItem(string[] A_Data, string item)
-        {
-            int Re = -1;
-            for (int i = 0; i < A_Data.Length; i++)
-            {
-                if (item == A_Data[i])
-                {
-                    Re = i;
-                }
-            }
-            return Re;
-        }
         public void Craft(string Item)
         {
-            string[] craftRes = TrimAspilt(GetData());
+            Dev = settings.Settings.Dev;
             //make a crafting system 
-            for (int c = 0; c < craftRes.Length; c++)
+            if(Dev)
+                Console.WriteLine("system: finding item form database ");
+            if("Wooden pickaxe" == Item || "WP" == Item || "wp" == Item)
+                Craft2I(items.Wood, 3, items.stick, 2, items.WoodenPickaxe, 1);
+            else if ("Stone pickaxe" == Item || "SP" == Item || "sp" == Item)
+                Craft2I(items.stone, 3, items.stick, 2, items.StonePickaxe, 1);
+            else if ("Iron pickaxe" == Item || "IP" == Item || "ip" == Item)
+                Craft2I(items.ironIngot, 3, items.stick, 2, items.IronPickaxe, 1);
+            else if ("Sticks" == Item || "sticks" == Item)
+                Craft1I(items.Wood, 2, items.stick, 4);
+            else if ("iron" == Item || "Iron" == Item)
+                Craft2I(items.ironore, 2, items.coal, 1, items.ironIngot, 1);
+            else if ("iron2" == Item || "Iron2" == Item)
+                Craft2I(items.ironore, 4, items.coal, 2, items.ironIngot, 2);
+            else
             {
-                if(c == 0)
-                    Console.WriteLine("system finding item form database " + c);
-                if ("Stone pickaxe" == Item || "SP" == Item || "sp" == Item)
+                if (Dev)
+                    Bug.MessBug("01001", Bugs.craft);
+            }
+        }
+        public void Craft1I(items items1, int Item1Con, items Re, int ReCon)
+        {
+            for (int s = 0; s < C_Player.InvIndex; s++)
+            {
+                if (C_Player.Inv[s] == items1)
                 {
-                    Console.WriteLine("system Get Item form database " + c);
-                    for (int s = 0; s < C_Player.InvIndex; s++)
+                    int F = 0;
+                    if (C_Player.InvCon[s] >= Item1Con)
                     {
-                        for (int a = 0; a < C_Player.InvIndex; a++)
+                        if (C_Player.InvCon[s] == Item1Con)
                         {
-                            if (C_Player.inv[s] == items.stone && C_Player.inv[a] == items.stick)
+                            C_Player.InvCon[s] = 0;
+                            C_Player.Inv[s] = items.none;
+                        }
+                        else
+                            C_Player.InvCon[s] = C_Player.InvCon[s] - Item1Con;
+                        F++;
+                    }
+                    if (F == 1)
+                    {
+                        bool Done = false;
+                        for (int i = 0; i < C_Player.InvIndex; i++)
+                        {
+                            if (C_Player.Inv[i] == Re && Done != true)
                             {
-                                Console.WriteLine("Inv item ok");
-                                int Re = 0;
-                                if(C_Player.invCon[s] >= 3)
-                                {
-                                    C_Player.invCon[s] -= 3;
-                                    Re++;
-                                }
-                                if(C_Player.invCon[a] >= 2)
-                                {
-                                    C_Player.invCon[a] -= 3;
-                                    Re++;
-                                }
-                                if(Re == 2)
-                                {
-                                    Console.WriteLine("good " + Re);
-
-                                }
+                                C_Player.Inv[i] = Re;
+                                C_Player.InvCon[i] = C_Player.InvCon[i] + ReCon;
+                                Done = true;
                             }
-                            else
+                            else if (C_Player.Inv[C_Player.InvIndex] == items.none && Done != true && i == C_Player.InvIndex - 1)
                             {
-                                Bug.MessBug("01010", Bugs.shop);
+                                C_Player.Inv[C_Player.InvIndex] = Re;
+                                C_Player.InvCon[C_Player.InvIndex] = C_Player.InvCon[C_Player.InvIndex] + ReCon;
+                                C_Player.InvIndex++;
+                                Done = true;
                             }
                         }
                     }
-                    //SP
                 }
-                else
+
+            }
+        }
+        public void Craft2I(items items1, int Item1Con, items items2, int Item2Con, items Re, int ReCon)
+        {
+            for (int s = 0; s < C_Player.InvIndex; s++)
+            {
+                for (int a = 0; a < C_Player.InvIndex; a++)
                 {
-                    Bug.MessBug("01001", Bugs.shop);
+                    if (C_Player.Inv[s] == items1 && C_Player.Inv[a] == items2)
+                    {
+                        int F = 0;
+                        if (C_Player.InvCon[s] >= Item1Con)
+                        {
+                            if (C_Player.InvCon[s] == Item1Con)
+                            {
+                                C_Player.InvCon[s] = 0;
+                                C_Player.Inv[s] = items.none;
+                            }
+                            else
+                                C_Player.InvCon[s] = C_Player.InvCon[s] - Item1Con;
+                            F++;
+                        }
+                        if (C_Player.InvCon[a] >= Item2Con)
+                        {
+                            if (C_Player.InvCon[a] == Item2Con)
+                            {
+                                C_Player.InvCon[a] = 0;
+                                C_Player.Inv[a] = items.none;
+                            }
+                            else
+                                C_Player.InvCon[a] -= Item2Con;
+                            F++;
+                        }
+                        if (F == 2)
+                        {
+                            bool Done = false;
+                            for (int i = 0; i < C_Player.InvIndex; i++)
+                            {
+                                if (C_Player.Inv[i] == Re && Done != true)
+                                {
+                                    C_Player.Inv[i] = Re;
+                                    C_Player.InvCon[i] = C_Player.InvCon[i] + ReCon;
+                                    Done = true;
+                                }
+                                else if(C_Player.Inv[C_Player.InvIndex] == items.none && Done != true && i == C_Player.InvIndex)
+                                {
+                                    C_Player.Inv[C_Player.InvIndex] = Re;
+                                    C_Player.InvCon[C_Player.InvIndex] = C_Player.InvCon[C_Player.InvIndex] + ReCon;
+                                    C_Player.InvIndex++;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
+
     }
 }

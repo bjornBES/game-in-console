@@ -2,12 +2,14 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>game_in_console</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Shoping\Class\" />
+    <Compile Remove="Shoping\Class\**" />
+    <EmbeddedResource Remove="Shoping\Class\**" />
+    <None Remove="Shoping\Class\**" />
   </ItemGroup>
 
 </Project>

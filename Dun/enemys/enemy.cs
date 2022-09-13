@@ -9,11 +9,21 @@ namespace game_in_console.dun.enemys
         public string name;
         public int Hp;
         public int Dps;
+        /// <summary>
+        /// the level the enemy is at
+        /// </summary>
         public int StartLevel;
+        public int dodge;
     }
     public class EnemyData : Data
     {
-        public int C;
+        /// <summary>
+        /// what the hit chance is to hit the player
+        /// </summary>
+        public int HitChance;
+        /// <summary>
+        /// what dun level the enemy can appear in
+        /// </summary>
         public int DunLevel;
     }
     public class BossData : Data
@@ -26,14 +36,16 @@ namespace game_in_console.dun.enemys
         public EnemyData[] Data = new EnemyData[100];
         int enemyIndex = 0;
         int BossDataIndex = 0;
-        public void addenemy(string name, int Hp, int Dps, int Chane, int DunLevel, int Level)
+        public void addenemy(string name, int Hp, int Dps, int chance, int DunLevel, int Level, int dodge)
         {
             Data[enemyIndex].name = name;
             Data[enemyIndex].Hp = Hp;
             Data[enemyIndex].Dps = Dps;
-            Data[enemyIndex].C = Chane;
+            Data[enemyIndex].HitChance = chance;
             Data[enemyIndex].DunLevel = DunLevel;
             Data[enemyIndex].StartLevel = Level;
+            Data[enemyIndex].dodge = dodge;
+            enemyIndex++;
         }
         public void addBoss(string name, int Hp, int Dps, int DunLevel)
         {
@@ -41,6 +53,7 @@ namespace game_in_console.dun.enemys
             BossData[BossDataIndex].Hp = Hp;
             BossData[BossDataIndex].Dps = Dps;
             BossData[BossDataIndex].DunLevel = DunLevel;
+            BossDataIndex++;
         }
     }
     public class enemy
@@ -48,11 +61,11 @@ namespace game_in_console.dun.enemys
         static EnemyCom data = new EnemyCom();
         enemy()
         {
-            data.addenemy("Test", 25, 1, 50, 1, 1);
-            data.addenemy("Rat", 10, 1, 25, 1, 1);
-            data.addenemy("Skeleton", 25, 2, 50, 2, 1);
+            data.addenemy("Rat", 10, 1, 25, 1, 1, 50);
+            data.addenemy("Skeleton", 25, 2, 50, 2, 1,25);
+            data.addenemy("Mimic", 50, 3, 75, -1, 2,25);
         }
-        public static Data GetEnemy(string name)
+        public static EnemyData GetEnemy(string name)
         {
             EnemyData Re = new EnemyData();
             for (int i = 0; i < data.Data.Length; i++)
@@ -62,9 +75,10 @@ namespace game_in_console.dun.enemys
                     Re.name = data.Data[i].name;
                     Re.Hp = data.Data[i].Hp;
                     Re.Dps = data.Data[i].Dps;
-                    Re.C = data.Data[i].C;
+                    Re.HitChance = data.Data[i].HitChance;
                     Re.DunLevel = data.Data[i].DunLevel;
                     Re.StartLevel = data.Data[i].StartLevel;
+                    Re.dodge = data.Data[i].dodge;
                 }
             }
             return Re;
