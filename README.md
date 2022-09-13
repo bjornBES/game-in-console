@@ -1,6 +1,6 @@
 # game-in-console
 this is a game in a console this is only text baset where you can go in to the wild and explore the dungeons with in the wild
-i hope to release the game in about 2-3 weeks if you need more info of the game say it on twitter @bjornBEs1
+i hope to release the game in this year(2022) if you need more info of the game say it on twitter @bjornBEs1
 Bug codes 
 {
 	shop = 019
