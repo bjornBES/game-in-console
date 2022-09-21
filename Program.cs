@@ -16,14 +16,14 @@ namespace game_in_console
         {
             Console.WriteLine("Hello you there what is your name?");
             Program program = new Program(); 
-            program.start();
+            program.PStart();
         }
-        void start()
+        void PStart()
         {
             PlayerName = Console.ReadLine();
-            Start();
+            base.Start();
             if (PlayerName == "devB" || PlayerName == "BEsBB")
-                new Dev(Player, password, PlayerName);
+                new Dev(Player, Password, PlayerName);
             if (PlayerName != "skipto" || PlayerName == "devB" || PlayerName == "BEsBB")
                 To();
             Update();
@@ -33,8 +33,8 @@ namespace game_in_console
             NPCNames.PlayerName = PlayerName;
             if (settings.Settings.Dev == false)
             {
-                NPCNames._1NPCNameDialog(0);
-                NPCNames._1NPCNameDialog(1);
+                NPCNames.BolvarDialog(0);
+                NPCNames.BolvarDialog(1);
             }
             Console.WriteLine("there is a thing coming your way");
             Console.WriteLine(NPCNames.PlayerHelperName + ": hello " + NPCNames.PlayerName + " im "+ NPCNames.PlayerHelperName + " and i am here to help you just say help to me if you need help");
@@ -49,7 +49,7 @@ namespace game_in_console
                 case startOp.none:
                     break;
                 case startOp.mine:
-                    mine.MineStone(items.StonePickaxe);
+                    OtherSystem.MineStone(items.StonePickaxe);
                     break;
                 case startOp.StartDun:
                     Dun.D_Start();
@@ -60,7 +60,7 @@ namespace game_in_console
                     Console.WriteLine(Player.Coins);
                     break;
                 case startOp.Shop:
-                    Shop.S_Shop(true, false);
+                    Shop.ShopStart(true, false);
                     break;
                 case startOp.Inv:
                     Player.GetPlayerInv();
@@ -85,6 +85,7 @@ namespace game_in_console
                     Console.WriteLine();
                     break;
             }
+            Player.UpdatePlayer();
             Update();
         }
         bool EnC = false;

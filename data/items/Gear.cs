@@ -5,6 +5,7 @@ using game_in_console.dun;
 using game_in_console.dun.enemys;
 using game_in_console;
 using game_in_console.otherSystem;
+using game_in_console.player;
 using game_in_console.enums;
 
 namespace game_in_console.data.items
@@ -12,7 +13,7 @@ namespace game_in_console.data.items
     public class GearData
     {
         public string name;
-        public string dis;
+        public string discretion;
         public int ItemS;
         public int HP;
         public int armor;
@@ -30,9 +31,10 @@ namespace game_in_console.data.items
         public int BlockChance;
         public int HitChance;
     }
-    public class gear
+    public class Gear
     {
         public Player Player;
+        readonly DiscretionBase DiscretionBase = new DiscretionBase();
         public GearData GetGearData(ArmorTypes armorType)
         {
             GearData re = new GearData();
@@ -41,33 +43,164 @@ namespace game_in_console.data.items
                 case ArmorTypes.helmet:
                     switch (Player.Gear.Helm)
                     {
-                        case helmet_Armor.dark_rongers_hood:
-                            re.armor = 15;
-                            re.dis = "how did you get that? form WOW";
-                            re.ItemS = 32;
-                            break;
                         case helmet_Armor.Crown_of_the_Righteous:
-                            re.armor = 20;
-                            re.dis = "how holy is this? about 99%";
-                            re.DPS = 10;
-                            re.speed = 1;
+                            re.discretion = "how holy is this? about 16.666666666666666666666666666...   7%";
                             re.ItemS = 32;
+                            re.HP = 20;
+                            re.armor = 20;
+                            re.DPS = 25;
+                            re.Agility = 15;
+                            re.speed = 15;
+                            re.dodgeC = 20;
                             break;
-                        case helmet_Armor.scouts_hood:
+                        case helmet_Armor.Steel_helmet:
+                            re.discretion = DiscretionBase.SteelHelmetDis(Player);
+                            re.ItemS = 28;
+                            re.HP = 18;
+                            re.armor = 18;
+                            re.DPS = 20;
+                            re.Agility = 10;
+                            re.speed = 10;
+                            re.dodgeC = 15;
                             break;
-                        case helmet_Armor.leather:
+                        case helmet_Armor.Bronze_helmet:
+                            if (settings.Settings.IsMetric == true)
+                            {
+                                re.discretion = "100% steel how heavy is it... 1.4kg";
+                                if (Player.Skills.Strength! > 10)
+                                    re.discretion = "100% steel how heavy is it... 1.4kg + you are weak";
+                                else
+                                    re.discretion = "100% steel how heavy is it... only? 1.48 kg?";
+                            }
+                            else
+                            {
+                                re.discretion = "100% steel how heavy is it... 2.5 lbs";
+                                if (Player.Skills.Strength! > 10)
+                                    re.discretion = "100% steel how heavy is it... 2.5 lbs + you are weak";
+                                else
+                                    re.discretion = "100% steel how heavy is it... only? 2.5 lbs?";
+                            }
+                            re.ItemS = 0;
+                            re.HP = 0;
+                            re.armor = 0;
+                            re.DPS = 0;
+                            re.Agility = 0;
+                            re.speed = 0;
+                            re.dodgeC = 0;
                             break;
-                        case helmet_Armor.iron:
+                        case helmet_Armor.Diamond_helmet:
+                            re.discretion = "";
+                            re.ItemS = 0;
+                            re.HP = 0;
+                            re.armor = 0;
+                            re.DPS = 0;
+                            re.Agility = 0;
+                            re.speed = 0;
+                            re.dodgeC = 0;
+                            break;
+                        case helmet_Armor.iron_helmet:
+                            re.discretion = "";
+                            re.ItemS = 0;
+                            re.HP = 0;
+                            re.armor = 0;
+                            re.DPS = 0;
+                            re.Agility = 0;
+                            re.speed = 0;
+                            re.dodgeC = 0;
+                            break;
+                        case helmet_Armor.leather_helmet:
+                            re.discretion = "";
+                            re.ItemS = 0;
+                            re.HP = 0;
+                            re.armor = 0;
+                            re.DPS = 0;
+                            re.Agility = 0;
+                            re.speed = 0;
+                            re.dodgeC = 0;
+                            break;
+                    }
+                    break;
+                case ArmorTypes.Shoulders:
+                    switch (Player.Gear.Shoulders)
+                    {
+                        case Shoulders_Armor.Righteous_shoulders:
+                            re.discretion = "";
+                            re.ItemS = 0;
+                            re.HP = 0;
+                            re.armor = 0;
+                            re.DPS = 0;
+                            re.Agility = 0;
+                            re.speed = 0;
+                            re.dodgeC = 0;
+                            break;
+                        case Shoulders_Armor.Steel_shoulders:
+                            re.discretion = "";
+                            re.ItemS = 0;
+                            re.HP = 0;
+                            re.armor = 0;
+                            re.DPS = 0;
+                            re.Agility = 0;
+                            re.speed = 0;
+                            re.dodgeC = 0;
+                            break;
+                        case Shoulders_Armor.Bronze_shoulders:
+                            re.discretion = "";
+                            re.ItemS = 0;
+                            re.HP = 0;
+                            re.armor = 0;
+                            re.DPS = 0;
+                            re.Agility = 0;
+                            re.speed = 0;
+                            re.dodgeC = 0;
+                            break;
+                        case Shoulders_Armor.Diamond_shoulders:
+                            re.discretion = "";
+                            re.ItemS = 0;
+                            re.HP = 0;
+                            re.armor = 0;
+                            re.DPS = 0;
+                            re.Agility = 0;
+                            re.speed = 0;
+                            re.dodgeC = 0;
+                            break;
+                        case Shoulders_Armor.iron_shoulders:
+                            re.discretion = "";
+                            re.ItemS = 0;
+                            re.HP = 0;
+                            re.armor = 0;
+                            re.DPS = 0;
+                            re.Agility = 0;
+                            re.speed = 0;
+                            re.dodgeC = 0;
+                            break;
+                        case Shoulders_Armor.leather_shoulders:
+                            re.discretion = "";
+                            re.ItemS = 0;
+                            re.HP = 0;
+                            re.armor = 0;
+                            re.DPS = 0;
+                            re.Agility = 0;
+                            re.speed = 0;
+                            re.dodgeC = 0;
                             break;
                         default:
                             break;
                     }
                     break;
-                case ArmorTypes.Shoulders:
-                    break;
                 case ArmorTypes.Chestplece:
                     break;
                 case ArmorTypes.Cloak:
+                    break;
+                case ArmorTypes.Ofhand:
+                    break;
+                case ArmorTypes.legs:
+                    switch (Player.Gear.legs)
+                    {
+                        case legs_Armor.Righteous_legs:
+                            break;
+                        default:
+                            break;
+                    }
                     break;
                 case ArmorTypes.MainHand:
                     switch (Player.Gear.MainHand)
@@ -135,23 +268,6 @@ namespace game_in_console.data.items
                         default:
                             break;
                     }
-                    break;
-                case ArmorTypes.Ofhand:
-                    break;
-                case ArmorTypes.legs:
-                    switch (Player.Gear.legs)
-                    {
-                        case legs_Armor.leather:
-                            break;
-                        case legs_Armor.Righteous_legs:
-                            break;
-                        case legs_Armor.iron:
-                            break;
-                        default:
-                            break;
-                    }
-                    break;
-                default:
                     break;
             }
             return re;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,6 +7,7 @@ namespace game_in_console
 {
     public static class Input
     {
+        static readonly Random random = new Random();
         static bool E { get; set; }
         public static void SetEesy()
         {
@@ -27,11 +29,17 @@ namespace game_in_console
         }
         public static bool Chance(int a, int min, int max)
         {
-            Random random = new Random();
             if (random.Next(min, max) < a)
                 return true;
             else
                 return false;
+        }
+        public static int Range(int min, int max,int x)
+        {
+            if (random.Next(min, max) == x)
+                return 1;
+            else
+                return 0;
         }
     }
 }

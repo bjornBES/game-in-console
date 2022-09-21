@@ -8,6 +8,7 @@ using game_in_console.dun;
 using game_in_console.dun.enemys;
 using game_in_console.bug;
 using game_in_console.enums;
+using game_in_console.player;
 using GameEMain;
 namespace game_in_console
 {
@@ -59,8 +60,10 @@ namespace game_in_console
             else
             {
                 Bug.MessBug("196813785696849373228402159147087096127008678178", Bugs.Dev);
-                playername = "Not devB or not BEsBB";
             }
+            Playername = playername;
         }
+
+        public string Playername { get; }
     }
 }

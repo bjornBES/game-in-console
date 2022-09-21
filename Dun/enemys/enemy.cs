@@ -36,7 +36,7 @@ namespace game_in_console.dun.enemys
         public EnemyData[] Data = new EnemyData[100];
         int enemyIndex = 0;
         int BossDataIndex = 0;
-        public void addenemy(string name, int Hp, int Dps, int chance, int DunLevel, int Level, int dodge)
+        public void Addenemy(string name, int Hp, int Dps, int chance, int DunLevel, int Level, int dodge)
         {
             Data[enemyIndex].name = name;
             Data[enemyIndex].Hp = Hp;
@@ -47,7 +47,7 @@ namespace game_in_console.dun.enemys
             Data[enemyIndex].dodge = dodge;
             enemyIndex++;
         }
-        public void addBoss(string name, int Hp, int Dps, int DunLevel)
+        public void AddBoss(string name, int Hp, int Dps, int DunLevel)
         {
             BossData[BossDataIndex].name = name;
             BossData[BossDataIndex].Hp = Hp;
@@ -56,14 +56,14 @@ namespace game_in_console.dun.enemys
             BossDataIndex++;
         }
     }
-    public class enemy
+    public class Enemy
     {
-        static EnemyCom data = new EnemyCom();
-        enemy()
+        static readonly EnemyCom data = new EnemyCom();
+        Enemy()
         {
-            data.addenemy("Rat", 10, 1, 25, 1, 1, 50);
-            data.addenemy("Skeleton", 25, 2, 50, 2, 1,25);
-            data.addenemy("Mimic", 50, 3, 75, -1, 2,25);
+            data.Addenemy("Rat", 10, 1, 25, 1, 1, 50);
+            data.Addenemy("Skeleton", 25, 2, 50, 2, 1,25);
+            data.Addenemy("Mimic", 50, 3, 75, -1, 2,25);
         }
         public static EnemyData GetEnemy(string name)
         {

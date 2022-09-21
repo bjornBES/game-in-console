@@ -1,6 +1,7 @@
 ﻿using game_in_console.dun.enemys;
 using game_in_console.NPC.Name;
 using GameEMain;
+using game_in_console.player;
 using System;
 
 namespace game_in_console.dun
@@ -10,12 +11,12 @@ namespace game_in_console.dun
         public Player player;
         public NPCNames nPCNames;
         public string[] DunRoomMap { get; set; }
-        int DunLevel { get; set; } = 1;
+        private readonly int DunLevel = 1;
 
         int Enemylimit = 11;
         int enemyC = 0;
-        int min = 0;
-        int Max = 8;
+        readonly int min = 0;
+        readonly int Max = 8;
         int Rooms = 4;
         int exit = 5;
         /// <summary>
@@ -29,8 +30,8 @@ namespace game_in_console.dun
             GenDun();
             if (PlayerlevelDun > 7)
             {
-                Enemylimit = Enemylimit + 2;
-                Rooms = Rooms + 2;
+                Enemylimit += 2;
+                Rooms += 2;
             }
             switch (PlayerlevelDun)
             {
@@ -64,14 +65,14 @@ namespace game_in_console.dun
                     Rooms = 22;
                     break;
             }
-            update();
+            Update();
         }
         int GoAway = 4;
         bool DunDone;
         int Playerroom;
         int playerX = 0;
         int playerY = 0;
-        public void update()
+        public void Update()
         {
             if (Playerroom == DunRoomMap.Length)
             {
@@ -107,7 +108,7 @@ namespace game_in_console.dun
                 string DunUser = Console.ReadLine();
                 Contorls(DunUser);
                 if (DunDone == false)
-                    update();
+                    Update();
             }
         }
         public void Exit()
@@ -139,12 +140,12 @@ namespace game_in_console.dun
             if (DunUser == "w" || DunUser == "W" && playerY <= 8 * 8)
             {
                 playerX++;
-                playerY = playerY - 8;
+                playerY -= 8;
             }
             if (DunUser == "s" || DunUser == "S" && playerY >= 0)
             {
                 playerX++;
-                playerY = playerY + 8;
+                playerY += 8;
             }
             if (DunUser == "C")
             {
@@ -230,10 +231,10 @@ namespace game_in_console.dun
         {
             if (attack == 0 && HP == 0 && HitChance == 0 && dodge == 0)
             {
-                attack = enemy.GetEnemy(name).Dps;
-                HP = enemy.GetEnemy(name).Hp;
-                HitChance = enemy.GetEnemy(name).HitChance;
-                dodge = enemy.GetEnemy(name).dodge;
+                attack = Enemy.GetEnemy(name).Dps;
+                HP = Enemy.GetEnemy(name).Hp;
+                HitChance = Enemy.GetEnemy(name).HitChance;
+                dodge = Enemy.GetEnemy(name).dodge;
             }
             Console.WriteLine("you can attack(attack) or check(C)");
             string AttackUser = Console.ReadLine();
@@ -302,12 +303,10 @@ namespace game_in_console.dun
         void GenDun()
         {
             DunRoomMap = new string[Rooms];
-            string TempDunRoom = "";
             random = new Random();
             for (int s = 0; s < Rooms; s++)
             {
-                int Doors = 0;
-                TempDunRoom = "";
+                string TempDunRoom = "";
                 for (int i = 0; i < 8 * 8; i++)
                 {
                     TempDunRoom =
@@ -327,10 +326,6 @@ namespace game_in_console.dun
                 if (TempDunRoom.Contains('7') && exit != 0)
                 {
                     exit--;
-                }
-                if (TempDunRoom.Contains('8'))
-                {
-                    Doors++;
                 }
                 TempDunRoom = TempDunRoom.Replace('0', ' ');//air
                 TempDunRoom = TempDunRoom.Replace('1', '#');//tile

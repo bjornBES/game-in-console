@@ -12,6 +12,9 @@
         coal,
         stick,
         Wood,
+        steel,
+        bukkit,
+        lava_bukkit,
 
         WoodenPickaxe,
         StonePickaxe,
@@ -27,37 +30,49 @@
     }
     public enum helmet_Armor
     {
-        dark_rongers_hood,
         Crown_of_the_Righteous,
-        scouts_hood,
-        leather,
-        Righteous_helmet,
-        iron,
+        Steel_helmet,
+        Bronze_helmet,
+        Diamond_helmet,
+        iron_helmet,
+        leather_helmet,
     }
     public enum Shoulders_Armor
     {
-        leather,
-        Righteous_Shoulders,
-        iron,
+        Righteous_shoulders,
+        Steel_shoulders,
+        Bronze_shoulders,
+        Diamond_shoulders,
+        iron_shoulders,
+        leather_shoulders,
     }
     public enum Chestplece_Armor
     {
-        leather,
-        Righteous_Chestplece,
-        iron,
+        Righteous_chestplece,
+        Steel_chestplece,
+        Bronze_chestplece,
+        Diamond_chestplece,
+        iron_chestplece,
+        leather_chestplece,
     }
     public enum Cloak_Armor
     {
-        leather,
-        Righteous_Cloak,
+        Righteous_cloak,
+        Steel_cloak,
+        Bronze_cloak,
+        Diamond_cloak,
+        iron_cloak,
+        leather_cloak,
         A_Piece_of_cloth,
-        iron,
     }
     public enum legs_Armor
     {
-        leather,
         Righteous_legs,
-        iron,
+        Steel_legs,
+        Bronze_legs,
+        Diamond_legs,
+        iron_legs,
+        leather_legs,
     }
     public enum ArmorTypes
     {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using game_in_console.player;
 using System.Text;
 
 namespace game_in_console.NPC.Name
@@ -16,10 +17,7 @@ namespace game_in_console.NPC.Name
         public string[] Dia_ShopKeeperOut = { "thanks you and bye", "bye", "farewell hero" };
         public string[] sayYes = { "yes", "Yes", "Y", "y" };
         public string[] sayWM = { "WorldMap", "worldmap", "wm", "WM" };
-        public void _ShopKeeperDialog()
-        { 
-        }
-        public void _1NPCNameDialog(int Dialog)
+        public void BolvarDialog(int Dialog)
         {
             if(Dialog == 0)
             {
