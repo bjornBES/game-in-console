@@ -16,3 +16,4 @@ you can mine ores, cut wood and go in a dungeon and fight enemys and bosses
 - [x] make the crafting system more clean
 - [ ] Make the dungeon generation more user friendly and more clean
 - [ ] Make more content
+- [ ] make a save system!!!
