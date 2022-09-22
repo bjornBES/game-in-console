@@ -17,6 +17,10 @@ namespace game_in_console.NPC.Name
         public string[] Dia_ShopKeeperOut = { "thanks you and bye", "bye", "farewell hero" };
         public string[] sayYes = { "yes", "Yes", "Y", "y" };
         public string[] sayWM = { "WorldMap", "worldmap", "wm", "WM" };
+        public void BolvarWL(string mess)
+        {
+            Console.WriteLine(_1NPCName + ": " + mess);
+        }
         public void BolvarDialog(int Dialog)
         {
             if(Dialog == 0)
@@ -25,17 +29,17 @@ namespace game_in_console.NPC.Name
                 Console.WriteLine("You: " + "where am i? and who are you?");
                 Console.WriteLine("i am " + _1NPCName + " and you are in Strombard");
                 Console.WriteLine("You: " + "you said where?");
-                Console.WriteLine(_1NPCName + ": do you have a map?");
+                BolvarWL("do you have a map?");
                 Console.WriteLine("say no to lie or say yes to not lie");
                 if (Input.GetLine(sayYes))
                 {
                     Console.WriteLine("You: " + "yes i have a map");
-                    Console.WriteLine(_1NPCName + ": " + "yes yes can you open it");
+                    BolvarWL("yes yes can you open it");
                 }
                 else
                 {
                     Console.WriteLine("You: " + "no i do not have a map");
-                    Console.WriteLine(_1NPCName + ": " + "ok here take this map and open it");
+                    BolvarWL("ok here take this map and open it");
                 }
             }
             if(Dialog == 1)
@@ -43,12 +47,13 @@ namespace game_in_console.NPC.Name
                 Console.WriteLine(@"say ""WorldMap"" to open your map");
                 if (Input.GetLine(sayWM))
                     Console.WriteLine(WorldMap);
-                Console.WriteLine("You: " + "what is Firestormb and IronMake and what is the wild?");
-                Console.WriteLine(_1NPCName + ": " + "Firestromb is a friend and the wild is a place where no one has gone to in over 1000 years");
+                Console.WriteLine("You: " + "What is Firestorm and IronMake and what is the wild?");
+                BolvarWL("Firestromb is a friend and the wild is a place where no one has gone to in over 1000 years");
                 Console.WriteLine("You: " + "but what is IronMake? ");
-                Console.WriteLine(_1NPCName + ": " + "IronMake yes... its an enemy we have try to destory them but there are still here ");
-                Console.WriteLine(_1NPCName + ": " + "if you want to go there you need to train for it");
-                Console.WriteLine(_1NPCName + ": " + "get your gear/crafting mat at the shop");
+                BolvarWL("IronMake yes... it's an enemy we have try to destroy them but there are still here ");
+                BolvarWL("if you want to go there you need to train for it");
+                BolvarWL("get better gear by getting materials and crafting them into something");
+                BolvarWL("here is my old axe, try to get some wood in the forest");
                 Console.WriteLine(@"say ""shop"" to go to the shop");
             }
         }

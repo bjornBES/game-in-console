@@ -162,7 +162,7 @@ namespace game_in_console.dun
         public void Loot()
         {
             Console.WriteLine("There is loot");
-            if (player.Tools.torch == false)
+            if (player.PTools.torch == false)
             {
                 Console.WriteLine("you cant see a chast you say");
                 Console.WriteLine("i need a torch to see this");
@@ -275,12 +275,12 @@ namespace game_in_console.dun
         }
         public void RoomMap()
         {
-            if (player.Tools.torch)
+            if (player.PTools.torch)
             {
                 Console.WriteLine("you are on " + playerX + " " + playerY + " on a " + DunRoomMap[Playerroom][playerX + playerY]);
                 Console.WriteLine(DunRoomMap[Playerroom]);
             }
-            if (player.Tools.torch == false)
+            if (player.PTools.torch == false)
             {
                 Console.WriteLine("you are on " + playerX + " " + playerY + " on a " + DunRoomMap[Playerroom][playerX + playerY]);
                 if (playerY != 0 && playerX != 0)

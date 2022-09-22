@@ -15,11 +15,13 @@ namespace game_in_console.player
 {
     public class PlayerData
     {
+        public int BronzeCount;
+        public bool WoodW = true, StoneW, smeltingS, alloysS, anvil;
         public Skills SkillsBase;
         public Skills Skills;
         public PlayerGear Gear;
         public Gear gear;
-        public Tools Tools;
+        public Tools PTools;
         public bool IsDun;
         public Items[] Inv;
         public int[] InvCon;
@@ -29,6 +31,30 @@ namespace game_in_console.player
         public void LevelUp(int level)
         {
             
+        }
+        public void GetItem(Items AddItem, int con)
+        {
+            bool GetIn = false;
+            for (int i = 0; i < InvIndex; i++)
+            {
+                if(Inv[i] == AddItem)
+                {
+                    InvCon[i] += con;
+                    GetIn = true;
+                }
+                if(Inv[i] == Items.none)
+                {
+                    Inv[i] = AddItem;
+                    InvCon[i] = con;
+                    GetIn = true;
+                }
+            }
+            if(GetIn != true)
+            {
+                InvIndex++;
+                Inv[InvIndex] = AddItem;
+                InvCon[InvIndex] = con;
+            }
         }
         /// <summary>
         /// 

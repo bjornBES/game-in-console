@@ -4,6 +4,7 @@
     {
         none,
         mine,
+        wood,
         StartDun,//SD
         Run,
         How_many_coins_go_i_have, //hmcgih coins

@@ -9,19 +9,82 @@ using game_in_console.otherSystem;
 using game_in_console.enums;
 namespace game_in_console
 {
+    /*
+                 if(PlayerName == "by engine develop")
+            {
+                Console.WriteLine("Ok here we go........");
+                Console.ReadKey();
+                Console.WriteLine("\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n");
+                Console.WriteLine("full releas coming in 2022");
+                Console.ReadKey();
+                Console.WriteLine("\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n");
+                Console.ReadKey();
+                Console.WriteLine("\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n");
+                Console.ReadKey();
+                Console.WriteLine("\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n");
+                Console.Clear();
+                Console.WriteLine("...");
+                Console.ReadKey();
+                int Time = 1000000000;
+                do
+                {
+                    Time--;
+                } while (Time != 0);
+                Console.WriteLine("high graphics?");
+                Console.ReadKey();
+                Time = 1000000000;
+                do
+                {
+                    Time--;
+                } while (Time != 0);
+                Console.WriteLine("?");
+                Console.ReadKey();
+                Console.WriteLine("\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n");
+                Console.WriteLine("explore dungeons with enemy");
+                Console.WriteLine("and find the wild");
+                Console.ReadKey();
+                Time = 50;
+                do
+                {
+                    Time--;
+                    Console.WriteLine("\r\n");
+                } while (Time != 0);
+                Console.Clear();
+                Console.WriteLine("are you up to the challenage");
+                Console.WriteLine("download it now on engine.develop.itch.io/game-in-console");
+                Console.ReadKey();
+                Console.Clear();
+                Console.WriteLine("download it now we need the money :D");
+                Console.ReadKey();
+                Console.Clear();
+            }
+     */
     public class Program : GameE
     {
         string PlayerName;
         static void Main()
         {
             Console.WriteLine("Hello you there what is your name?");
+            //Console.WriteLine("who maked this? start with a by and a name ilke this...");
+            Console.Title = "Game in a console";
             Program program = new Program(); 
             program.PStart();
         }
         public void PStart()
         {
             PlayerName = Console.ReadLine();
-            base.Start();
+            if(PlayerName == "the wild" || PlayerName == "The Wild" || PlayerName == "wild")
+            {
+                Console.WriteLine("you can no longer hear the voice");
+                Console.WriteLine("unknown voice:" + "YOU!");
+                Console.WriteLine("unknown voice:" + "how are you");
+                Console.WriteLine("you:" + "what is that?");
+                Console.WriteLine("unknown voice:" + "you have now been banished form this place");
+                Console.WriteLine("another unknown voice:" + "ok then i WILL find the human my self");
+                Console.WriteLine("unknown voice:" + "HAHA... i will see forward to that moment and i will kill you both if i need to");
+                Console.WriteLine("unknown voice:" + "MY SELF!!");
+            }
+            Start();
             if (PlayerName == "devB" || PlayerName == "BEsBB")
                 new Dev(Player, Password, PlayerName);
             if (PlayerName != "skipto" || PlayerName == "devB" || PlayerName == "BEsBB")
@@ -40,7 +103,8 @@ namespace game_in_console
             Console.WriteLine(NPCNames.PlayerHelperName + ": hello " + NPCNames.PlayerName + " im "+ NPCNames.PlayerHelperName + " and i am here to help you just say help to me if you need help");
         }
         void Update()
-        { 
+        {
+            Player.UpdatePlayer();
             string User = Console.ReadLine();
             if (settings.Settings.DunDev)
                 User = "StartDun";
@@ -49,7 +113,10 @@ namespace game_in_console
                 case StartOp.none:
                     break;
                 case StartOp.mine:
-                    OtherSystem.MineStone(Items.StonePickaxe);
+                    OtherSystem.Mine(Player.PTools.Pickaxe);
+                    break;
+                case StartOp.wood:
+                    OtherSystem.Wood(Player.PTools.Axe);
                     break;
                 case StartOp.StartDun:
                     Dun.D_Start();

@@ -3,15 +3,17 @@
     public enum Items
     {
         none,
-        enety,
         stone, //N
         flint, //N
         ironore, //N
         coal, //N
         Wood, //N
+        Piece_of_wood, //N
         tinore, //N
         copperore, //N
+        torch, //C WW
         stick, //C WW
+        iron_block, //C S
         ironIngot, //C S
         tinIngot, //C S
         copperIngot, //C S
@@ -23,6 +25,8 @@
         WoodenPickaxe,
         StonePickaxe,
         IronPickaxe,
+        steelPickaxe,
+        an_old_axe_form_Bolvar,
         WoodenAxe,
         StoneAxe,
         IronAxe,
@@ -31,6 +35,14 @@
         WoodenSword,
         StoneSword,
         IronSword,
+    }
+    public enum CraftingStations
+    {
+        WoodWork,
+        StoneWorkshop,
+        SmeltingStation,
+        AlloySmelt,
+        Anvil
     }
     public enum Helmet_Armor
     {

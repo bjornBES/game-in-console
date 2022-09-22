@@ -14,7 +14,7 @@ namespace game_in_console
 {
     public class Dev
     {
-        public bool DevAA { get; } = true;
+        public bool DevAA { get; } = false;
         public Dev(Player Player, int password, string playername)
         {
             if (DevAA == true)
@@ -27,38 +27,28 @@ namespace game_in_console
                     settings.Settings.Dev = true;
                     Player.Gear.MainHand = Items.IronSword;
                     Player.Coins = 99999;
-                    Player.InvIndex++;
-                    Player.Inv[0] = Items.stick;
-                    Player.InvCon[0] = 999;
-                    Player.InvIndex++;
-                    Player.Inv[1] = Items.stone;
-                    Player.InvCon[1] = 999;
-                    Player.InvIndex++;
-                    Player.Inv[2] = Items.ironore;
-                    Player.InvCon[2] = 999;
-                    Player.InvIndex++;
-                    Player.Inv[3] = Items.StonePickaxe;
-                    Player.InvCon[3] = 1;
+                    Player.GetItem(Items.stick, 999);
+                    Player.GetItem(Items.stone, 999);
+                    Player.GetItem(Items.ironore, 999);
+                    Player.GetItem(Items.StonePickaxe, 1);
+                    Player.GetItem(Items.StoneAxe, 1);
+                    Player.StoneW = true;
+                    Player.smeltingS = true;
+                    Player.alloysS = true;
+                    Player.anvil = true;
                 }
                 else if (Number == password.ToString() || Number == "dm")
                 {
                     settings.Settings.DunDev = true;
                     settings.Settings.Dev = true;
-                    Player.Tools.torch = true;
+                    Player.PTools.torch = true;
                     Player.Gear.MainHand = Items.IronSword;
                     Player.Coins = 99999;
                     Player.InvIndex++;
-                    Player.Inv[0] = Items.stick;
-                    Player.InvCon[0] = 999;
-                    Player.InvIndex++;
-                    Player.Inv[1] = Items.stone;
-                    Player.InvCon[1] = 999;
-                    Player.InvIndex++;
-                    Player.Inv[2] = Items.ironore;
-                    Player.InvCon[2] = 999;
-                    Player.InvIndex++;
-                    Player.Inv[3] = Items.StonePickaxe;
-                    Player.InvCon[3] = 1;
+                    Player.GetItem(Items.stick, 999);
+                    Player.GetItem(Items.stone, 999);
+                    Player.GetItem(Items.ironore, 999);
+                    Player.GetItem(Items.StonePickaxe, 1);
                 }
                 else
                 {

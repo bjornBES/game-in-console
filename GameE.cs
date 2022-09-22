@@ -74,8 +74,9 @@ namespace GameEMain
                 nPCNames = NPCNames
             };
             //mine
-            OtherSystem = new OtherSystem{
-                player = Player
+            OtherSystem = new OtherSystem {
+                player = Player,
+                NPCNames = NPCNames
             };
             #endregion
         }

@@ -14,7 +14,7 @@ namespace game_in_console.player
         {
             Skills = new Skills();
             SkillsBase = new Skills();
-            Tools = new Tools();
+            PTools = new Tools();
             Gear = new PlayerGear();
             int SpaceInInv = 50;
             Inv = new Items[SpaceInInv];
@@ -29,17 +29,15 @@ namespace game_in_console.player
         /// </summary>
         public void UpdatePlayer()
         {
-            for (int i = 0; i < InvIndex; i++)
-            {
-                if (Inv[i] == Items.bukkit)
-                    settings.Settings.HasBukkit = true;
-            }
+            PTools = GetTools();
             Skills.Hp = UpdateArmor(0, gear) + SkillsBase.Hp;
             Skills.armor = UpdateArmor(1, gear) + SkillsBase.armor;
             Skills.Strength = UpdateArmor(2, gear) + SkillsBase.Strength;
             Skills.Agility = UpdateArmor(3, gear) + SkillsBase.Agility;
             Skills.speed = UpdateArmor(4, gear) + SkillsBase.speed;
             Skills.dodgeC = UpdateArmor(5, gear) + SkillsBase.dodgeC;
+            if (BronzeCount == 2)
+                alloysS = true;
         }
         public void SetPLayerD()
         {
@@ -59,6 +57,44 @@ namespace game_in_console.player
             {
                 Console.WriteLine(InvCon[i].ToString() + " " + Inv[i].ToString() + ", ");
             }
+        }
+        public Tools GetTools()
+        {
+            Tools re = new Tools();
+            for (int i = 0; i < InvIndex; i++)
+            {
+                switch (Inv[i])
+                {
+                    case Items.WoodenPickaxe:
+                        re.Pickaxe = Inv[i];
+                        break;
+                    case Items.StonePickaxe:
+                        re.Pickaxe = Inv[i];
+                        break;
+                    case Items.IronPickaxe:
+                        re.Pickaxe = Inv[i];
+                        break;
+                    case Items.an_old_axe_form_Bolvar:
+                        re.Axe = Inv[i];
+                        break;
+                    case Items.WoodenAxe:
+                        re.Axe = Inv[i];
+                        break;
+                    case Items.StoneAxe:
+                        re.Axe = Inv[i];
+                        break;
+                    case Items.IronAxe:
+                        re.Axe = Inv[i];
+                        break;
+                    default:
+                        break;
+                }
+                if (Inv[i] == Items.bukkit)
+                    settings.Settings.HasBukkit = true;
+                if (Inv[i] == Items.torch)
+                    re.torch = true;
+            }
+            return re;
         }
     }
 }

@@ -53,6 +53,9 @@ namespace game_in_console
                 case "mine":
                     Re = StartOp.mine;
                     break;
+                case "wood":
+                    Re = StartOp.wood;
+                    break;
                 case "Craft":
                     Re = StartOp.Craft;
                     break;

@@ -34,6 +34,10 @@ namespace game_in_console
             else
                 return false;
         }
+        public static int ChanceOut(int min, int max)
+        {
+            return random.Next(min, max);
+        }
         public static int Range(int min, int max,int x)
         {
             if (random.Next(min, max) == x)
