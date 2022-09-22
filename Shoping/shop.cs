@@ -11,7 +11,7 @@ namespace game_in_console.Shoping.Class
 {
     public class ShopItemsList : GameE
     {
-        public items name;
+        public Items name;
         public int S_Con;
         public int S_cost;
         public int S_Chance;
@@ -284,11 +284,11 @@ namespace game_in_console.Shoping
         }
         void DeleteingItems(int Index)
         {
-            Taple[Index] = items.none;
+            Taple[Index] = Items.none;
             Con[Index] = 0;
             Cost[Index] = 0;
         }
-        int ChacePlayerInv(items Items)
+        int ChacePlayerInv(Items Items)
         {
             int Re = -1;
             for (int i = 0; i < S_player.Inv.Length; i++)

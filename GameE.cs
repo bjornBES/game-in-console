@@ -10,33 +10,6 @@ using game_in_console.enums;
 using game_in_console.player;
 namespace GameEMain
 {
-
-    #region enum
-    public enum City
-    {
-        Strombard,
-        ironmake,
-        firestromb,
-        the_roads
-    }
-    public enum ShopOp
-    {
-        none,
-        WCIB,
-        GO,
-        buy,
-        wcidih,
-        help
-    }
-    public enum CraftOp
-    {
-        none,
-        GO,
-        craft,
-        wcic,
-        help
-    }
-    #endregion
     public class GameE
     {
         public string TownMap { get; } =
@@ -66,7 +39,7 @@ namespace GameEMain
         public Shop Shop { get; set; }
         public NPCNames NPCNames { get; set; }
         public OtherSystem OtherSystem { get; set; }
-        public items[] Taple { get; } = { items.none, items.stick, items.stone, items.ironore, items.flint, items.coal, items.IronSword};
+        public Items[] Taple { get; } = { Items.none, Items.stick, Items.stone, Items.ironore, Items.flint, Items.coal, Items.IronSword};
         public int[] Con { get; } = { 0, 2, 3, 2, 2, 2, 1 };
         public int[] Cost { get; } = { 0, 10, 15, 20, 10, 15, 100 };
         public int[] Chance { get; } = { 0, 25, 20, 15, 25, 20, 10};

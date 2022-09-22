@@ -1,6 +1,6 @@
 ﻿namespace game_in_console.enums
 {
-    public enum startOp
+    public enum StartOp
     {
         none,
         mine,

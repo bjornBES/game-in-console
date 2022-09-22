@@ -12,73 +12,73 @@ namespace game_in_console
 {
     public class Converter
     {
-        public startOp UserToStartOp(string user)
+        public StartOp UserToStartOp(string user)
         {
-            startOp Re = startOp.none;
+            StartOp Re = StartOp.none;
             switch (user)
             {
                 case "Help":
-                    Re = startOp.help;
+                    Re = StartOp.help;
                     break;
                 case "help":
-                    Re = startOp.help;
+                    Re = StartOp.help;
                     break;
                 case "StartDun":
-                    Re = startOp.StartDun;
+                    Re = StartOp.StartDun;
                     break;
                 case "Run":
-                    Re = startOp.Run;
+                    Re = StartOp.Run;
                     break;
                 case "How many coins go i have":
-                    Re = startOp.How_many_coins_go_i_have;
+                    Re = StartOp.How_many_coins_go_i_have;
                     break;
                 case "hmcgih":
-                    Re = startOp.How_many_coins_go_i_have;
+                    Re = StartOp.How_many_coins_go_i_have;
                     break;
                 case "coins":
-                    Re = startOp.How_many_coins_go_i_have;
+                    Re = StartOp.How_many_coins_go_i_have;
                     break;
                 case "Shop":
-                    Re = startOp.Shop;
+                    Re = StartOp.Shop;
                     break;
                 case "shop":
-                    Re = startOp.Shop;
+                    Re = StartOp.Shop;
                     break;
                 case "Inv":
-                    Re = startOp.Inv;
+                    Re = StartOp.Inv;
                     break;
                 case "inv":
-                    Re = startOp.Inv;
+                    Re = StartOp.Inv;
                     break;
                 case "mine":
-                    Re = startOp.mine;
+                    Re = StartOp.mine;
                     break;
                 case "Craft":
-                    Re = startOp.Craft;
+                    Re = StartOp.Craft;
                     break;
                 case "craft":
-                    Re = startOp.Craft;
+                    Re = StartOp.Craft;
                     break;
                 case "WorldMap":
-                    Re = startOp.WorldMap;
+                    Re = StartOp.WorldMap;
                     break;
                 case "TownMap":
-                    Re = startOp.TownMap;
+                    Re = StartOp.TownMap;
                     break;
                 case "WM":
-                    Re = startOp.WorldMap;
+                    Re = StartOp.WorldMap;
                     break;
                 case "TM":
-                    Re = startOp.TownMap;
+                    Re = StartOp.TownMap;
                     break;
                 case "wm":
-                    Re = startOp.WorldMap;
+                    Re = StartOp.WorldMap;
                     break;
                 case "tm":
-                    Re = startOp.TownMap;
+                    Re = StartOp.TownMap;
                     break;
                 case "speed":
-                    Re = startOp.speed;
+                    Re = StartOp.speed;
                     break;
             }
             return Re;

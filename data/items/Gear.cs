@@ -43,7 +43,7 @@ namespace game_in_console.data.items
                 case ArmorTypes.helmet:
                     switch (Player.Gear.Helm)
                     {
-                        case helmet_Armor.Crown_of_the_Righteous:
+                        case Helmet_Armor.Crown_of_the_Righteous:
                             re.discretion = "how holy is this? about 16.666666666666666666666666666...   7%";
                             re.ItemS = 32;
                             re.HP = 20;
@@ -53,8 +53,8 @@ namespace game_in_console.data.items
                             re.speed = 15;
                             re.dodgeC = 20;
                             break;
-                        case helmet_Armor.Steel_helmet:
-                            re.discretion = DiscretionBase.SteelHelmetDis(Player);
+                        case Helmet_Armor.Steel_helmet:
+                            re.discretion = DiscretionBase.SteelarmorDis(armorType, Player);
                             re.ItemS = 28;
                             re.HP = 18;
                             re.armor = 18;
@@ -63,32 +63,7 @@ namespace game_in_console.data.items
                             re.speed = 10;
                             re.dodgeC = 15;
                             break;
-                        case helmet_Armor.Bronze_helmet:
-                            if (settings.Settings.IsMetric == true)
-                            {
-                                re.discretion = "100% steel how heavy is it... 1.4kg";
-                                if (Player.Skills.Strength! > 10)
-                                    re.discretion = "100% steel how heavy is it... 1.4kg + you are weak";
-                                else
-                                    re.discretion = "100% steel how heavy is it... only? 1.48 kg?";
-                            }
-                            else
-                            {
-                                re.discretion = "100% steel how heavy is it... 2.5 lbs";
-                                if (Player.Skills.Strength! > 10)
-                                    re.discretion = "100% steel how heavy is it... 2.5 lbs + you are weak";
-                                else
-                                    re.discretion = "100% steel how heavy is it... only? 2.5 lbs?";
-                            }
-                            re.ItemS = 0;
-                            re.HP = 0;
-                            re.armor = 0;
-                            re.DPS = 0;
-                            re.Agility = 0;
-                            re.speed = 0;
-                            re.dodgeC = 0;
-                            break;
-                        case helmet_Armor.Diamond_helmet:
+                        case Helmet_Armor.Bronze_helmet:
                             re.discretion = "";
                             re.ItemS = 0;
                             re.HP = 0;
@@ -98,7 +73,7 @@ namespace game_in_console.data.items
                             re.speed = 0;
                             re.dodgeC = 0;
                             break;
-                        case helmet_Armor.iron_helmet:
+                        case Helmet_Armor.Diamond_helmet:
                             re.discretion = "";
                             re.ItemS = 0;
                             re.HP = 0;
@@ -108,7 +83,17 @@ namespace game_in_console.data.items
                             re.speed = 0;
                             re.dodgeC = 0;
                             break;
-                        case helmet_Armor.leather_helmet:
+                        case Helmet_Armor.iron_helmet:
+                            re.discretion = "";
+                            re.ItemS = 0;
+                            re.HP = 0;
+                            re.armor = 0;
+                            re.DPS = 0;
+                            re.Agility = 0;
+                            re.speed = 0;
+                            re.dodgeC = 0;
+                            break;
+                        case Helmet_Armor.leather_helmet:
                             re.discretion = "";
                             re.ItemS = 0;
                             re.HP = 0;
@@ -196,7 +181,7 @@ namespace game_in_console.data.items
                 case ArmorTypes.legs:
                     switch (Player.Gear.legs)
                     {
-                        case legs_Armor.Righteous_legs:
+                        case Legs_Armor.Righteous_legs:
                             break;
                         default:
                             break;
@@ -205,62 +190,62 @@ namespace game_in_console.data.items
                 case ArmorTypes.MainHand:
                     switch (Player.Gear.MainHand)
                     {
-                        case enums.items.none:
+                        case enums.Items.none:
                             re.DPS = 5;
                             re.HitChance = 99;
                             re.BlockChance = 0;
                             break;
-                        case enums.items.stone:
+                        case enums.Items.stone:
                             re.DPS = 6;
                             re.HitChance = 50;
                             re.BlockChance = 0;
                             break;
-                        case enums.items.stick:
+                        case enums.Items.stick:
                             re.DPS = 3;
                             re.HitChance = 85;
                             re.BlockChance = 25;
                             break;
-                        case enums.items.WoodenPickaxe:
+                        case enums.Items.WoodenPickaxe:
                             re.DPS = 8;
                             re.HitChance = 80;
                             re.BlockChance = 25;
                             break;
-                        case enums.items.StonePickaxe:
+                        case enums.Items.StonePickaxe:
                             re.DPS = 12;
                             re.HitChance = 75;
                             re.BlockChance = 30;
                             break;
-                        case enums.items.IronPickaxe:
+                        case enums.Items.IronPickaxe:
                             re.DPS = 15;
                             re.HitChance = 70;
                             re.BlockChance = 30;
                             break;
-                        case enums.items.WoodenAxe:
+                        case enums.Items.WoodenAxe:
                             re.DPS = 9;
                             re.HitChance = 80;
                             re.BlockChance = 20;
                             break;
-                        case enums.items.StoneAxe:
+                        case enums.Items.StoneAxe:
                             re.DPS = 14;
                             re.HitChance = 75;
                             re.BlockChance = 20;
                             break;
-                        case enums.items.IronAxe:
+                        case enums.Items.IronAxe:
                             re.DPS = 18;
                             re.HitChance = 60;
                             re.BlockChance = 25;
                             break;
-                        case enums.items.WoodenSword:
+                        case enums.Items.WoodenSword:
                             re.DPS = 10;
                             re.HitChance = 80;
                             re.BlockChance = 40;
                             break;
-                        case enums.items.StoneSword:
+                        case enums.Items.StoneSword:
                             re.DPS = 15;
                             re.HitChance = 75;
                             re.BlockChance = 40;
                             break;
-                        case enums.items.IronSword:
+                        case enums.Items.IronSword:
                             re.DPS = 20;
                             re.HitChance = 65;
                             re.BlockChance = 50;

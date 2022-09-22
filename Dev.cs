@@ -14,54 +14,63 @@ namespace game_in_console
 {
     public class Dev
     {
+        public bool DevAA { get; } = true;
         public Dev(Player Player, int password, string playername)
         {
-            Console.WriteLine("Password hint its not 1234 or y4");
-            Console.WriteLine("nomal dev = db , dun master = DM");
-            string Number = Console.ReadLine();
-            if (Number == password.ToString() || Number == "debug" || Number == "db")
+            if (DevAA == true)
             {
-                settings.Settings.Dev = true;
-                Player.Gear.MainHand = items.IronSword;
-                Player.Coins = 99999;
-                Player.InvIndex++;
-                Player.Inv[0] = items.stick;
-                Player.InvCon[0] = 999;
-                Player.InvIndex++;
-                Player.Inv[1] = items.stone;
-                Player.InvCon[1] = 999;
-                Player.InvIndex++;
-                Player.Inv[2] = items.ironore;
-                Player.InvCon[2] = 999;
-                Player.InvIndex++;
-                Player.Inv[3] = items.StonePickaxe;
-                Player.InvCon[3] = 1;
-            }
-            else if (Number == password.ToString() || Number == "dm")
-            {
-                settings.Settings.DunDev = true;
-                settings.Settings.Dev = true;
-                Player.Tools.torch = true;
-                Player.Gear.MainHand = items.IronSword;
-                Player.Coins = 99999;
-                Player.InvIndex++;
-                Player.Inv[0] = items.stick;
-                Player.InvCon[0] = 999;
-                Player.InvIndex++;
-                Player.Inv[1] = items.stone;
-                Player.InvCon[1] = 999;
-                Player.InvIndex++;
-                Player.Inv[2] = items.ironore;
-                Player.InvCon[2] = 999;
-                Player.InvIndex++;
-                Player.Inv[3] = items.StonePickaxe;
-                Player.InvCon[3] = 1;
+                Console.WriteLine("Password hint its not 1234 or y4");
+                Console.WriteLine("nomal dev = db , dun master = DM");
+                string Number = Console.ReadLine();
+                if (Number == password.ToString() || Number == "debug" || Number == "db")
+                {
+                    settings.Settings.Dev = true;
+                    Player.Gear.MainHand = Items.IronSword;
+                    Player.Coins = 99999;
+                    Player.InvIndex++;
+                    Player.Inv[0] = Items.stick;
+                    Player.InvCon[0] = 999;
+                    Player.InvIndex++;
+                    Player.Inv[1] = Items.stone;
+                    Player.InvCon[1] = 999;
+                    Player.InvIndex++;
+                    Player.Inv[2] = Items.ironore;
+                    Player.InvCon[2] = 999;
+                    Player.InvIndex++;
+                    Player.Inv[3] = Items.StonePickaxe;
+                    Player.InvCon[3] = 1;
+                }
+                else if (Number == password.ToString() || Number == "dm")
+                {
+                    settings.Settings.DunDev = true;
+                    settings.Settings.Dev = true;
+                    Player.Tools.torch = true;
+                    Player.Gear.MainHand = Items.IronSword;
+                    Player.Coins = 99999;
+                    Player.InvIndex++;
+                    Player.Inv[0] = Items.stick;
+                    Player.InvCon[0] = 999;
+                    Player.InvIndex++;
+                    Player.Inv[1] = Items.stone;
+                    Player.InvCon[1] = 999;
+                    Player.InvIndex++;
+                    Player.Inv[2] = Items.ironore;
+                    Player.InvCon[2] = 999;
+                    Player.InvIndex++;
+                    Player.Inv[3] = Items.StonePickaxe;
+                    Player.InvCon[3] = 1;
+                }
+                else
+                {
+                    Bug.MessBug("196813785696849373228402159147087096127008678178", Bugs.Dev);
+                }
+                Playername = playername;
             }
             else
             {
-                Bug.MessBug("196813785696849373228402159147087096127008678178", Bugs.Dev);
+                Console.WriteLine("the dev fun is not here");
+                Bug.MessBug("404100", Bugs.Dev);
             }
-            Playername = playername;
         }
 
         public string Playername { get; }

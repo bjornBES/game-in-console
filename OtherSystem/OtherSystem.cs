@@ -46,12 +46,12 @@ namespace game_in_console.otherSystem
                 }
             }
         }
-        public void MineStone(items Pickaxe)
+        public void MineStone(Items Pickaxe)
         {
             //if (HasPickaxe)
             switch (Pickaxe)
             {
-                case items.StonePickaxe:
+                case Items.StonePickaxe:
                     Mine_WalkingDis = RNG.Next(5, 10);
                     break;
             }
@@ -85,24 +85,24 @@ namespace game_in_console.otherSystem
         }
         public void Mine()
         {
-            items Re = items.none;
+            Items Re = Items.none;
             Random random = new Random();
             int perCent = random.Next(0, 70);
             if (perCent < 30)
             {
-                Re = items.ironore;
+                Re = Items.ironore;
             }
             else if (perCent < 30 + 10)
             {
-                Re = items.coal;
+                Re = Items.coal;
             }
             else if (perCent < 30 + 20)
             {
-                Re = items.stone;
+                Re = Items.stone;
             }
             else if (perCent < 30 + 40)
             {
-                Re = items.stone;
+                Re = Items.stone;
             }
             bool Done = false;
             for (int i = 0; i < player.InvIndex; i++)
@@ -113,7 +113,7 @@ namespace game_in_console.otherSystem
                     player.InvCon[i] = player.InvCon[i] + 1;
                     Done = true;
                 }
-                else if (player.Inv[player.InvIndex] == items.none && Done != true && i == player.InvIndex - 1)
+                else if (player.Inv[player.InvIndex] == Items.none && Done != true && i == player.InvIndex - 1)
                 {
                     player.Inv[player.InvIndex] = Re;
                     player.InvCon[player.InvIndex] = player.InvCon[player.InvIndex] + 1;

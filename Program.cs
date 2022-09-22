@@ -9,7 +9,7 @@ using game_in_console.otherSystem;
 using game_in_console.enums;
 namespace game_in_console
 {
-    class Program : GameE
+    public class Program : GameE
     {
         string PlayerName;
         static void Main()
@@ -18,7 +18,7 @@ namespace game_in_console
             Program program = new Program(); 
             program.PStart();
         }
-        void PStart()
+        public void PStart()
         {
             PlayerName = Console.ReadLine();
             base.Start();
@@ -46,42 +46,42 @@ namespace game_in_console
                 User = "StartDun";
             switch (converter.UserToStartOp(User))
             {
-                case startOp.none:
+                case StartOp.none:
                     break;
-                case startOp.mine:
-                    OtherSystem.MineStone(items.StonePickaxe);
+                case StartOp.mine:
+                    OtherSystem.MineStone(Items.StonePickaxe);
                     break;
-                case startOp.StartDun:
+                case StartOp.StartDun:
                     Dun.D_Start();
                     break;
-                case startOp.Run:
+                case StartOp.Run:
                     break;
-                case startOp.How_many_coins_go_i_have:
+                case StartOp.How_many_coins_go_i_have:
                     Console.WriteLine(Player.Coins);
                     break;
-                case startOp.Shop:
+                case StartOp.Shop:
                     Shop.ShopStart(true, false);
                     break;
-                case startOp.Inv:
+                case StartOp.Inv:
                     Player.GetPlayerInv();
                     break;
-                case startOp.Craft:
+                case StartOp.Craft:
                     Craft(true);
                     break;
-                case startOp.WorldMap:
+                case StartOp.WorldMap:
                         Console.WriteLine(WorldMap);
                     break;
-                case startOp.TownMap:
+                case StartOp.TownMap:
                         Console.WriteLine(TownMap);
                     break;
-                case startOp.speed:
+                case StartOp.speed:
                     if(settings.Settings.Dev)
                     {
                     Console.WriteLine("what speed");
                     Player.SkillsBase.speed = int.Parse(Console.ReadLine());
                     }
                     break;
-                case startOp.help:
+                case StartOp.help:
                     Console.WriteLine();
                     break;
             }

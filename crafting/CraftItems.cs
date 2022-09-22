@@ -21,26 +21,26 @@ namespace game_in_console.crafting
             if(Dev)
                 Console.WriteLine("system: finding item form database ");
             if("Wooden pickaxe" == Item || "WP" == Item || "wp" == Item)
-                Craft2I(items.Wood, 3, items.stick, 2, items.WoodenPickaxe, 1);
+                Craft2I(Items.Wood, 3, Items.stick, 2, Items.WoodenPickaxe, 1);
             else if ("Stone pickaxe" == Item || "SP" == Item || "sp" == Item)
-                Craft2I(items.stone, 3, items.stick, 2, items.StonePickaxe, 1);
+                Craft2I(Items.stone, 3, Items.stick, 2, Items.StonePickaxe, 1);
             else if ("Iron pickaxe" == Item || "IP" == Item || "ip" == Item)
-                Craft2I(items.ironIngot, 3, items.stick, 2, items.IronPickaxe, 1);
+                Craft2I(Items.ironIngot, 3, Items.stick, 2, Items.IronPickaxe, 1);
             else if ("Sticks" == Item || "sticks" == Item)
-                Craft1I(items.Wood, 2, items.stick, 4);
+                Craft1I(Items.Wood, 2, Items.stick, 4);
             else if ("iron" == Item || "Iron" == Item)
-                Craft2I(items.ironore, 2, items.coal, 1, items.ironIngot, 1);
+                Craft2I(Items.ironore, 2, Items.coal, 1, Items.ironIngot, 1);
             else if ("iron2" == Item || "Iron2" == Item)
-                Craft2I(items.ironore, 4, items.coal, 2, items.ironIngot, 2);
+                Craft2I(Items.ironore, 4, Items.coal, 2, Items.ironIngot, 2);
             else if ("steel" == Item || "Steel" == Item || "SB" == Item || "sb" == Item)
-                Craft3I(items.ironore, 2, items.coal, 4, items.lava_bukkit, 1, items.steel, 1);
+                Craft3I(Items.ironore, 2, Items.coal, 4, Items.lava_bukkit, 1, Items.steel, 1);
             else
             {
                 if (Dev)
                     Bug.MessBug("01001", Bugs.craft);
             }
         }
-        public void Craft1I(items items1, int Item1Con, items Re, int ReCon)
+        public void Craft1I(Items items1, int Item1Con, Items Re, int ReCon)
         {
             for (int s = 0; s < C_Player.InvIndex; s++)
             {
@@ -52,7 +52,7 @@ namespace game_in_console.crafting
                         if (C_Player.InvCon[s] == Item1Con)
                         {
                             C_Player.InvCon[s] = 0;
-                            C_Player.Inv[s] = items.none;
+                            C_Player.Inv[s] = Items.none;
                         }
                         else
                             C_Player.InvCon[s] = C_Player.InvCon[s] - Item1Con;
@@ -69,7 +69,7 @@ namespace game_in_console.crafting
                                 C_Player.InvCon[i] = C_Player.InvCon[i] + ReCon;
                                 Done = true;
                             }
-                            else if (C_Player.Inv[C_Player.InvIndex] == items.none && Done != true && i == C_Player.InvIndex - 1)
+                            else if (C_Player.Inv[C_Player.InvIndex] == Items.none && Done != true && i == C_Player.InvIndex - 1)
                             {
                                 C_Player.Inv[C_Player.InvIndex] = Re;
                                 C_Player.InvCon[C_Player.InvIndex] = C_Player.InvCon[C_Player.InvIndex] + ReCon;
@@ -82,7 +82,7 @@ namespace game_in_console.crafting
 
             }
         }
-        public void Craft2I(items items1, int Item1Con, items items2, int Item2Con, items Re, int ReCon)
+        public void Craft2I(Items items1, int Item1Con, Items items2, int Item2Con, Items Re, int ReCon)
         {
             for (int s = 0; s < C_Player.InvIndex; s++)
             {
@@ -96,7 +96,7 @@ namespace game_in_console.crafting
                             if (C_Player.InvCon[s] == Item1Con)
                             {
                                 C_Player.InvCon[s] = 0;
-                                C_Player.Inv[s] = items.none;
+                                C_Player.Inv[s] = Items.none;
                             }
                             else
                                 C_Player.InvCon[s] = C_Player.InvCon[s] - Item1Con;
@@ -107,7 +107,7 @@ namespace game_in_console.crafting
                             if (C_Player.InvCon[a] == Item2Con)
                             {
                                 C_Player.InvCon[a] = 0;
-                                C_Player.Inv[a] = items.none;
+                                C_Player.Inv[a] = Items.none;
                             }
                             else
                                 C_Player.InvCon[a] -= Item2Con;
@@ -124,7 +124,7 @@ namespace game_in_console.crafting
                                     C_Player.InvCon[i] = C_Player.InvCon[i] + ReCon;
                                     Done = true;
                                 }
-                                else if(C_Player.Inv[C_Player.InvIndex] == items.none && Done != true && i == C_Player.InvIndex)
+                                else if(C_Player.Inv[C_Player.InvIndex] == Items.none && Done != true && i == C_Player.InvIndex)
                                 {
                                     C_Player.Inv[C_Player.InvIndex] = Re;
                                     C_Player.InvCon[C_Player.InvIndex] = C_Player.InvCon[C_Player.InvIndex] + ReCon;
@@ -136,7 +136,7 @@ namespace game_in_console.crafting
                 }
             }
         }
-        public void Craft3I(items items1, int Item1Con, items items2, int Item2Con, items items3, int Item3Con, items Re, int ReCon)
+        public void Craft3I(Items items1, int Item1Con, Items items2, int Item2Con, Items items3, int Item3Con, Items Re, int ReCon)
         {
             for (int s = 0; s < C_Player.InvIndex; s++)
             {
@@ -152,7 +152,7 @@ namespace game_in_console.crafting
                                 if (C_Player.InvCon[s] == Item1Con)
                                 {
                                     C_Player.InvCon[s] = 0;
-                                    C_Player.Inv[s] = items.none;
+                                    C_Player.Inv[s] = Items.none;
                                 }
                                 else
                                     C_Player.InvCon[s] = C_Player.InvCon[s] - Item1Con;
@@ -163,7 +163,7 @@ namespace game_in_console.crafting
                                 if (C_Player.InvCon[a] == Item2Con)
                                 {
                                     C_Player.InvCon[a] = 0;
-                                    C_Player.Inv[a] = items.none;
+                                    C_Player.Inv[a] = Items.none;
                                 }
                                 else
                                     C_Player.InvCon[a] -= Item2Con;
@@ -174,7 +174,7 @@ namespace game_in_console.crafting
                                 if (C_Player.InvCon[d] == Item3Con)
                                 {
                                     C_Player.InvCon[d] = 0;
-                                    C_Player.Inv[d] = items.none;
+                                    C_Player.Inv[d] = Items.none;
                                 }
                                 else
                                     C_Player.InvCon[d] = C_Player.InvCon[d] - Item3Con;
@@ -191,7 +191,7 @@ namespace game_in_console.crafting
                                         C_Player.InvCon[i] = C_Player.InvCon[i] + ReCon;
                                         Done = true;
                                     }
-                                    else if (C_Player.Inv[C_Player.InvIndex] == items.none && Done != true && i == C_Player.InvIndex)
+                                    else if (C_Player.Inv[C_Player.InvIndex] == Items.none && Done != true && i == C_Player.InvIndex)
                                     {
                                         C_Player.Inv[C_Player.InvIndex] = Re;
                                         C_Player.InvCon[C_Player.InvIndex] = C_Player.InvCon[C_Player.InvIndex] + ReCon;

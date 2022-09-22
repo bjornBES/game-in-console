@@ -17,10 +17,10 @@ namespace game_in_console.player
             Tools = new Tools();
             Gear = new PlayerGear();
             int SpaceInInv = 50;
-            Inv = new items[SpaceInInv];
+            Inv = new Items[SpaceInInv];
             for (int i = 0; i < Inv.Length; i++)
             {
-                Inv[i] = items.none;
+                Inv[i] = Items.none;
             }
             InvCon = new int[SpaceInInv];
         }
@@ -31,7 +31,7 @@ namespace game_in_console.player
         {
             for (int i = 0; i < InvIndex; i++)
             {
-                if (Inv[i] == items.bukkit)
+                if (Inv[i] == Items.bukkit)
                     settings.Settings.HasBukkit = true;
             }
             Skills.Hp = UpdateArmor(0, gear) + SkillsBase.Hp;

@@ -21,7 +21,7 @@ namespace game_in_console.player
         public Gear gear;
         public Tools Tools;
         public bool IsDun;
-        public items[] Inv;
+        public Items[] Inv;
         public int[] InvCon;
         public int InvIndex = 0;
         public int Coins = 50;
@@ -104,8 +104,8 @@ gear.GetGearData(ArmorTypes.legs).dodgeC;
     }
     public class Tools
     {
-        public items Pickaxe;
-        public items Axe;
+        public Items Pickaxe;
+        public Items Axe;
         public bool torch;
     }
     public class Skills
@@ -125,12 +125,12 @@ gear.GetGearData(ArmorTypes.legs).dodgeC;
     }
     public class PlayerGear
     {
-        public helmet_Armor Helm;
+        public Helmet_Armor Helm;
         public Shoulders_Armor Shoulders;
         public Chestplece_Armor Chestplece;
         public Cloak_Armor Cloak;
-        public items MainHand;
-        public items Ofhand;
-        public legs_Armor legs;
+        public Items MainHand;
+        public Items Ofhand;
+        public Legs_Armor legs;
     }
 }

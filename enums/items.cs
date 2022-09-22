@@ -1,34 +1,38 @@
 ﻿namespace game_in_console.enums
 {
-    public enum items
+    public enum Items
     {
-        The_1_ring,
         none,
         enety,
-        stone,
-        flint,
-        ironore,
-        ironIngot,
-        coal,
-        stick,
-        Wood,
-        steel,
-        bukkit,
-        lava_bukkit,
+        stone, //N
+        flint, //N
+        ironore, //N
+        coal, //N
+        Wood, //N
+        tinore, //N
+        copperore, //N
+        stick, //C WW
+        ironIngot, //C S
+        tinIngot, //C S
+        copperIngot, //C S
+        steel, //C AS
+        bronze, //C AS
+        bukkit, //C A
+        lava_bukkit, //C find lava
 
         WoodenPickaxe,
         StonePickaxe,
         IronPickaxe,
         WoodenAxe,
         StoneAxe,
+        IronAxe,
         Hand_of_Justice,
         Sword_of_Justice,
-        IronAxe,
         WoodenSword,
         StoneSword,
         IronSword,
     }
-    public enum helmet_Armor
+    public enum Helmet_Armor
     {
         Crown_of_the_Righteous,
         Steel_helmet,
@@ -65,7 +69,7 @@
         leather_cloak,
         A_Piece_of_cloth,
     }
-    public enum legs_Armor
+    public enum Legs_Armor
     {
         Righteous_legs,
         Steel_legs,
