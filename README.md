@@ -17,7 +17,7 @@ the is like an ide game but you are always active in some way or form if that it
 you can mine ores, cut wood and go in a dungeon and fight enemys and bosses
 
 ~~## my tasks forward with this project
- - [x] ~~Make the crafting system more clean 
- - [ ] ~~Make the dungeon generation more user friendly and more clean
- - [ ] ~~Make more content
- - [ ] ~~make a save system!!!
+ [x]Make the crafting system more clean 
+ [ ] ~~Make the dungeon generation more user friendly and more clean
+ [ ] ~~Make more content
+ [ ] ~~make a save system!!!
