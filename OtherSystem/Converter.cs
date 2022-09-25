@@ -124,5 +124,19 @@ namespace game_in_console
             }
             return Re;
         }
+        public CraftHelpOp UserToHelpCraft(string user)
+        {
+            CraftHelpOp helpOp = CraftHelpOp.none;
+            switch (user)
+            {
+                case"system":
+                    helpOp = CraftHelpOp.systemHelp;
+                    break;
+                case "craft":
+                    helpOp = CraftHelpOp.craftHelp;
+                    break;
+            }
+            return helpOp;
+        }
     }
 }

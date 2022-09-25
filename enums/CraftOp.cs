@@ -8,4 +8,11 @@
         wcic,
         help
     }
+    public enum CraftHelpOp
+    {
+        none,
+        systemHelp,
+        craftHelp,
+
+    }
 }

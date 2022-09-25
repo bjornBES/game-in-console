@@ -21,7 +21,7 @@
         bronze, //C AS
         bukkit, //C A
         lava_bukkit, //C find lava
-
+        //main hand
         WoodenPickaxe,
         StonePickaxe,
         IronPickaxe,
@@ -35,6 +35,10 @@
         WoodenSword,
         StoneSword,
         IronSword,
+        //of hand
+        basic_shield,
+        average_shield,
+        advanced_shield,
     }
     public enum CraftingStations
     {

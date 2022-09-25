@@ -176,8 +176,6 @@ namespace game_in_console.data.items
                     break;
                 case ArmorTypes.Cloak:
                     break;
-                case ArmorTypes.Ofhand:
-                    break;
                 case ArmorTypes.legs:
                     switch (Player.Gear.legs)
                     {
@@ -186,6 +184,9 @@ namespace game_in_console.data.items
                         default:
                             break;
                     }
+                    break;
+                case ArmorTypes.Ofhand:
+
                     break;
                 case ArmorTypes.MainHand:
                     switch (Player.Gear.MainHand)
