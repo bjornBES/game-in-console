@@ -2,26 +2,27 @@
 using System.Collections.Generic;
 using game_in_console.player;
 using System.Text;
+using GameEMain;
 
 namespace game_in_console.NPC.Name
 {
-    public class NPCNames : GameEMain.GameE
+    public static class NPCNames
     {
-        public Player player;
-        public string _1NPCName = "Bolvar";
-        public string ShopKeeperName = "TheShopKeeper";
-        public string PlayerHelperName = "elf";
-        public string TheWild = "TheWild";
-        public string PlayerName;
-        public string[] Dia_ShopKeeperIn = { "hello what can i do for you?", "it's it not a good day", "The Shop has all the items you need :D" };
-        public string[] Dia_ShopKeeperOut = { "thanks you and bye", "bye", "farewell hero" };
-        public string[] sayYes = { "yes", "Yes", "Y", "y" };
-        public string[] sayWM = { "WorldMap", "worldmap", "wm", "WM" };
-        public void BolvarWL(string mess)
+        public static Player player;
+        public static string _1NPCName = "Bolvar";
+        public static string ShopKeeperName = "TheShopKeeper";
+        public static string PlayerHelperName = "elf";
+        public static string TheWild = "TheWild";
+        public static string PlayerName;
+        public static string[] Dia_ShopKeeperIn = { "hello what can i do for you?", "it's it not a good day", "The Shop has all the items you need :D" };
+        public static string[] Dia_ShopKeeperOut = { "thanks you and bye", "bye", "farewell hero" };
+        public static string[] sayYes = { "yes", "Yes", "Y", "y" };
+        public static string[] sayWM = { "WorldMap", "worldmap", "wm", "WM" };
+        public static void BolvarWL(string mess)
         {
             Console.WriteLine(_1NPCName + ": " + mess);
         }
-        public void BolvarDialog(int Dialog)
+        public static void BolvarDialog(int Dialog)
         {
             if(Dialog == 0)
             {
@@ -46,7 +47,7 @@ namespace game_in_console.NPC.Name
             {
                 Console.WriteLine(@"say ""WorldMap"" to open your map");
                 if (Input.GetLine(sayWM))
-                    Console.WriteLine(WorldMap);
+                    Console.WriteLine(GameE.WorldMap);
                 Console.WriteLine("You: " + "What is Firestorm and IronMake and what is the wild?");
                 BolvarWL("Firestromb is a friend and the wild is a place where no one has gone to in over 1000 years");
                 Console.WriteLine("You: " + "but what is IronMake? ");
@@ -57,7 +58,7 @@ namespace game_in_console.NPC.Name
                 Console.WriteLine(@"say ""shop"" to go to the shop");
             }
         }
-        public void TheWildDialog(bool first ,int Dialog)
+        public static void TheWildDialog(bool first ,int Dialog)
         {
             string need = "";
             if (Dialog == 0)

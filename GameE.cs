@@ -10,9 +10,9 @@ using game_in_console.enums;
 using game_in_console.player;
 namespace GameEMain
 {
-    public class GameE
+    public static class GameE
     {
-        public string TownMap { get; } =
+        public static string TownMap { get; } =
           @"    Shop             Craft                          " + "\n" +
            " ___________      ___________                       " + "\n" +
           @"/###########\    /###########\                      " + "\n" +
@@ -21,7 +21,7 @@ namespace GameEMain
            "____________________________________________________" + "\n" +
            "____________________________________________________" + "\n" +
            "____________________________________________________" + "\n";
-        public string WorldMap { get; } =
+        public static string WorldMap { get; } =
           @"Strombard   IronMake  Firestromb " + "\n" +
            "######    ####          ##       " + "\n" +
            "#####    ####          ###       " + "\n" +
@@ -30,20 +30,16 @@ namespace GameEMain
           @" \\\\|||||||||||\////            " + "\n" +
           @"  \\||||||||||\\\\               " + "\n" +
           @" the wild   \\\\_____            " + "\n";
-        public int Password { get; } = 3479;
-        public Converter converter;
-        public Player Player = new Player();
-        public Dun Dun;
-        public CraftItems craft;
-        public Gear gear;
-        public Shop Shop { get; set; }
-        public NPCNames NPCNames { get; set; }
-        public OtherSystem OtherSystem { get; set; }
-        public Items[] Taple { get; } = { Items.none, Items.stick, Items.stone, Items.ironore, Items.flint, Items.coal, Items.IronSword};
-        public int[] Con { get; } = { 0, 2, 3, 2, 2, 2, 1 };
-        public int[] Cost { get; } = { 0, 10, 15, 20, 10, 15, 100 };
-        public int[] Chance { get; } = { 0, 25, 20, 15, 25, 20, 10};
-        public void Start()
+        public static int Password { get; } = 3479;
+        public static Converter converter;
+        public static Player Player = new Player();
+        public static Dun Dun;
+        public static CraftItems craft;
+        public static Gear gear;
+        public static CraftMeun CraftMeun;
+        public static Shop Shop;
+        public static OtherSystem OtherSystem;
+        public static void Start()
         {
             #region Get Stuff
             //converter
@@ -55,9 +51,9 @@ namespace GameEMain
             //player
             Player.gear = gear;
             Player.SetPLayerD();
-            //npc
-            NPCNames = new NPCNames{
-                player = Player
+            CraftMeun = new CraftMeun
+            {
+
             };
             //craft
             craft = new CraftItems{
@@ -66,17 +62,14 @@ namespace GameEMain
             //shop
             Shop = new Shop{
                 S_player = Player,
-                S_NPC = NPCNames
             };
             //dun
             Dun = new Dun{
                 player = Player,
-                nPCNames = NPCNames
             };
             //mine
             OtherSystem = new OtherSystem {
                 player = Player,
-                NPCNames = NPCNames
             };
             #endregion
         }

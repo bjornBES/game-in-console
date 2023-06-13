@@ -13,7 +13,6 @@ namespace game_in_console.otherSystem
 {
     public class OtherSystem
     {
-        public NPCNames NPCNames;
         public Player player;
         public bool HasPickaxe;
         public bool HasBukkit;

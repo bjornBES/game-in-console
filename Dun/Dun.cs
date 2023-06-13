@@ -6,10 +6,9 @@ using System;
 
 namespace game_in_console.dun
 {
-    public class Dun : GameE
+    public class Dun
     {
         public Player player;
-        public NPCNames nPCNames;
         public string[] DunRoomMap { get; set; }
         private readonly int DunLevel = 1;
 
@@ -24,8 +23,8 @@ namespace game_in_console.dun
         /// </summary>
         public void D_Start()
         {
-            nPCNames.TheWildDialog(settings.Settings.FirstTimeInWild, 0);
-            nPCNames.TheWildDialog(settings.Settings.FirstTimeInWild, 1);
+            NPCNames.TheWildDialog(settings.Settings.FirstTimeInWild, 0);
+            NPCNames.TheWildDialog(settings.Settings.FirstTimeInWild, 1);
             int PlayerlevelDun = int.Parse(Console.ReadLine());
             GenDun();
             if (PlayerlevelDun > 7)
@@ -38,7 +37,7 @@ namespace game_in_console.dun
                 case 1:
                     Enemylimit = 11;
                     Rooms = 5;
-                    Console.WriteLine(nPCNames.TheWild + ": ok level 1 coming op");
+                    Console.WriteLine(NPCNames.TheWild + ": ok level 1 coming op");
                     break;
                 case 2:
                     Enemylimit = 16;
