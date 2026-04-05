@@ -1,7 +1,6 @@
 # game-in-console
 
-this game is not develop by a private party any more
-form Engine Develop
+this game is not develop anymore
 
 ~~this is a project i have had i my mind for a while so here it is a game in a console~~
 
